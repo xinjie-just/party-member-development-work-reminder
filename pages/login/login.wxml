@@ -1,0 +1,63 @@
+<!--pages/login/login.wxml-->
+<view class="page" data-weui-theme="light">
+	<view class="weui-form">
+		<view class="weui-form__text-area">
+			<h2 class="weui-form__title">大渡河智能助手</h2>
+		</view>
+		<view class="weui-form__control-area">
+			<view class="weui-cells__group weui-cells__group_form">
+				<view class="weui-cells weui-cells_form">
+					<view class="weui-cell weui-cell_active  {{isAccountWaring ? 'weui-cell_warn' : ''}}">
+						<view class="weui-cell__hd">
+							<label class="weui-label">账号</label>
+						</view>
+						<view class="weui-cell__bd weui-flex">
+							<input
+							 class="weui-input"
+							 placeholder="请输入账号"
+							 placeholder-class="weui-input__placeholder"
+							 bindinput="onInput"
+							 data-name="account"
+							 value="{{account}}"
+							/>
+							<view wx:if="{{showClearAccountBtn}}" class="weui-btn_reset weui-btn_icon weui-btn_input-clear" bindtap="onClear" data-name="account">
+								<i class="weui-icon-clear" />
+							</view>
+						</view>
+					</view>
+					<view class="weui-cell weui-cell_active {{isPasswordWaring ? 'weui-cell_warn' : ''}}">
+						<view class="weui-cell__hd">
+							<label class="weui-label">密码</label>
+						</view>
+						<view class="weui-cell__bd weui-flex">
+							<input
+							 class="weui-input"
+							 type="text"
+							 placeholder="请输入密码"
+							 placeholder-class="weui-input__placeholder"
+							 bindinput="onInput"
+							 data-name="password"
+							 value="{{password}}"
+							/>
+							<view wx:if="{{showClearPasswordBtn}}" class="weui-btn_reset weui-btn_icon weui-btn_input-clear" bindtap="onClear" data-name="password">
+								<i class="weui-icon-clear" />
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<mp-toptips msg="账号不能为空" type="error" show="{{isAccountWaring}}"></mp-toptips>
+		<mp-toptips msg="密码不能为空" type="error" show="{{isPasswordWaring}}"></mp-toptips>
+		<!-- <view class="weui-form__tips-area">
+			<view class="weui-form__tips">
+				<text>{{isAccountWaring ? '账号不能为空': ''}}</text>
+				<text>{{isPasswordWaring ? '密码不能为空': ''}}</text>
+			</view>
+		</view> -->
+		<view class="weui-form__opr-area">
+			<a class="weui-btn weui-btn_primary {{!account || !password ? 'weui-btn_disabled' : ''}}" bindtap="onConfirm">登录</a>
+		</view>
+	</view>
+</view>
+

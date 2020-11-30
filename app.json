@@ -1,0 +1,36 @@
+{
+  "pages":[
+    "pages/login/login",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/qa/qa",
+    "pages/search/search"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "大渡河智能助手",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/qa/qa",
+        "text": "智能问答",
+        "iconPath": "/assets/images/qa.png",
+        "selectedIconPath": "/assets/images/qa-active.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "智能搜索",
+        "iconPath": "/assets/images/search.png",
+        "selectedIconPath": "/assets/images/search-active.png"
+      }
+    ],
+    "color": "#333333",
+    "selectedColor": "#1890ff",
+    "backgroundColor": "#ffffff"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

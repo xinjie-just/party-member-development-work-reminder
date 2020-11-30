@@ -1,0 +1,19 @@
+{
+  "name": "party-member-development-work-reminder",
+  "version": "1.0.0",
+  "description": "## 党员发展工作提醒",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.datagrand.com:58422/lixinjie/DDHIA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "weui-miniprogram": "^1.0.5"
+  }
+}
