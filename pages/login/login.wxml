@@ -2,7 +2,7 @@
 <view class="page" data-weui-theme="light">
 	<view class="weui-form">
 		<view class="weui-form__text-area">
-			<h2 class="weui-form__title">大渡河智能助手</h2>
+			<h2 class="weui-form__title">党员发展工作提醒</h2>
 		</view>
 		<view class="weui-form__control-area">
 			<view class="weui-cells__group weui-cells__group_form">
