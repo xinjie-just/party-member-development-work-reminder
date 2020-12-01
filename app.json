@@ -1,34 +1,33 @@
 {
   "pages":[
-    "pages/login/login",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/qa/qa",
-    "pages/search/search"
+    "pages/mine/mine",
+    "pages/login/login",
+    "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "大渡河智能助手",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#A5131C",
+    "navigationBarTitleText": "党员发展工作提醒",
+    "navigationBarTextStyle":"white"
   },
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/qa/qa",
-        "text": "智能问答",
-        "iconPath": "/assets/images/qa.png",
-        "selectedIconPath": "/assets/images/qa-active.png"
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/assets/images/ic_home@3x.png",
+        "selectedIconPath": "/assets/images/ic_home_on@3x.png"
       },
       {
-        "pagePath": "pages/search/search",
-        "text": "智能搜索",
-        "iconPath": "/assets/images/search.png",
-        "selectedIconPath": "/assets/images/search-active.png"
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "/assets/images/ic_mine@3x.png",
+        "selectedIconPath": "/assets/images/ic_mine_on@3x.png"
       }
     ],
-    "color": "#333333",
-    "selectedColor": "#1890ff",
+    "color": "#666666",
+    "selectedColor": "#C8273A",
     "backgroundColor": "#ffffff"
   },
   "style": "v2",

@@ -1,51 +1,23 @@
 {
-  "id": "2131515",
-  "name": "大渡河智能助手小程序",
+  "id": "2238155",
+  "name": "党员发展工作提醒",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "6488794",
-      "name": "搜索",
-      "font_class": "search",
-      "unicode": "e602",
-      "unicode_decimal": 58882
+      "icon_id": "18529004",
+      "name": "ic_4_step",
+      "font_class": "ic_4_step",
+      "unicode": "e662",
+      "unicode_decimal": 58978
     },
     {
-      "icon_id": "8615354",
-      "name": "账号",
-      "font_class": "account",
-      "unicode": "e660",
-      "unicode_decimal": 58976
-    },
-    {
-      "icon_id": "17606704",
-      "name": "密 码",
-      "font_class": "password",
-      "unicode": "e67d",
-      "unicode_decimal": 59005
-    },
-    {
-      "icon_id": "10451441",
-      "name": "机器人",
-      "font_class": "robot-2",
-      "unicode": "e621",
-      "unicode_decimal": 58913
-    },
-    {
-      "icon_id": "15696680",
-      "name": "机器人",
-      "font_class": "robot-1",
-      "unicode": "e864",
-      "unicode_decimal": 59492
-    },
-    {
-      "icon_id": "10384899",
-      "name": "智能问答iqa-02",
-      "font_class": "qa",
-      "unicode": "e631",
-      "unicode_decimal": 58929
+      "icon_id": "18529005",
+      "name": "ic_4_name",
+      "font_class": "ic_4_name",
+      "unicode": "e663",
+      "unicode_decimal": 58979
     }
   ]
 }

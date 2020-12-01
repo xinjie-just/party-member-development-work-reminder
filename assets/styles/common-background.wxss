@@ -1,0 +1,5 @@
+.base-background {
+  width: 750rpx;
+  height: 484rpx;
+  background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
+}
