@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/wechat-login/wechat-login",
+    "pages/login/login",
     "pages/index/index",
     "pages/mine/mine",
-    "pages/login/login",
     "pages/logs/logs"
   ],
   "window":{

@@ -33,7 +33,7 @@ WXSS 标准：`https://developers.weixin.qq.com/miniprogram/dev/framework/view/w
 ## 项目介绍
 
 - 党员发展工作提醒(party-member-development-work-reminder)是一个小程序项目。
-- [党员发展工作提醒](https://github.com/xinjie-just/party-member-development-work-reminder)，最新分支：master。
+- [党员发展工作提醒](https://github.com/xinjie-just/party-member-development-work-reminder)，最新分支：main。
 - 项目参与者：小程序前端李芯杰，后端周杨，项目经理周杨。
 
 ## 快速入门
