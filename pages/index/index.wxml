@@ -1,15 +1,16 @@
 <view class="page">
     <view class="header">
         <text class="welcome">您好，XXXXX</text>
-        <text class="tips">您有如下代办事项</text>
+        <text wx:if="{{!noTodoList}}" class="tips">您有如下代办事项</text>
+        <text wx:if="{{noTodoList}}" class="tips">您暂无代办事项</text>
     </view>
     <view class="todo-container">
-        <view class="todo-list">
-            <text class="todo-item">AA,阶段节点待你确认</text>
-            <text class="todo-item">BB,阶段节点待你确认</text>
-            <text class="todo-item">CC,阶段节点待你确认</text>
-            <text class="todo-item">DD,阶段节点待你确认</text>
-        </view>
-        <button type="button" class="submit-btn">去处理</button>
+        <block wx:if="{{!noTodoList}}">
+            <view class="todo-list">
+                <text class="todo-item" wx:for="{{todoList}}" wx:key="index" catchtap="selectTodoItem">{{item}}</text>
+            </view>
+            <button type="button" class="submit-btn">去处理</button>
+        </block>
+        <image src="../../assets/images/img_nodata.png" class="no-data-img" wx:if="{{noTodoList}}"></image>
     </view>
 </view>

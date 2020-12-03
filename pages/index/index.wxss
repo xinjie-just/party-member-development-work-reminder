@@ -58,3 +58,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+.no-data-img {
+  display: block;
+  width: 240rpx;
+  height: 240rpx;
+  margin: 40rpx auto 0;
+}
