@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/bind-phone/bind-phone",
     "pages/index/index",
+    "pages/bind-phone/bind-phone",
     "pages/wechat-login/wechat-login",
     "pages/login/login",
     "pages/mine/mine",

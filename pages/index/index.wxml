@@ -1,3 +1,15 @@
-<view class="page" data-weui-theme="{{theme}}">
-    <view class="header">首页</view>
+<view class="page">
+    <view class="header">
+        <text class="welcome">您好，XXXXX</text>
+        <text class="tips">您有如下代办事项</text>
+    </view>
+    <view class="todo-container">
+        <view class="todo-list">
+            <text class="todo-item">AA,阶段节点待你确认</text>
+            <text class="todo-item">BB,阶段节点待你确认</text>
+            <text class="todo-item">CC,阶段节点待你确认</text>
+            <text class="todo-item">DD,阶段节点待你确认</text>
+        </view>
+        <button type="button" class="submit-btn">去处理</button>
+    </view>
 </view>
