@@ -1,0 +1,18 @@
+<!--pages/index/detail/detail.wxml-->
+<view class="page">
+  <text class="header">待办事项名称</text>
+  <view class="body">
+    <view class="name">
+      <text class="iconfont icon-ic_4_name"></text>
+      <text class="label">姓名</text>
+      <text class="value">张三</text>
+    </view>
+    <view class="step">
+      <text class="iconfont icon-ic_4_step"></text>
+      <text class="label">步骤</text>
+      <view class="value">步骤的详细内容展示，步骤的详细内容展示，步骤的详细内容。</view>
+    </view>
+    <view class="submit-btn">确认已办理</view>
+  </view>
+</view>
+

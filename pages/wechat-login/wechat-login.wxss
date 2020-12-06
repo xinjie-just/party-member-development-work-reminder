@@ -14,7 +14,6 @@
   text-align: center;
   margin-bottom: 30rpx;
   font-size: 44rpx;
-  font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #333333;
   line-height: 41px;
@@ -23,8 +22,6 @@
 .auth-describe {
   display: block;
   font-size: 28rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
   color: #666666;
   line-height: 28rpx;
   text-align: center;
@@ -41,8 +38,8 @@
   color: #aaa;
 }
 
-.login-btn {
-  width: auto;
+.submit-btn {
+  width: 400rpx;
   padding-top: 24rpx;
   padding-bottom: 24rpx;
   line-height: 50rpx;
@@ -50,13 +47,8 @@
   background: #E41E35;
   border-radius: 49rpx;
   font-size: 36rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
   color: #fff;
 }
-
-
-
 
 .usermotto {
   margin-top: 200px;

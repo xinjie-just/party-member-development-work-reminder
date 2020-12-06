@@ -7,9 +7,9 @@
     <view class="todo-container">
         <block wx:if="{{!noTodoList}}">
             <view class="todo-list">
-                <text class="todo-item" wx:for="{{todoList}}" wx:key="index" catchtap="selectTodoItem">{{item}}</text>
+                <text class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">{{item.title}}</text>
             </view>
-            <button type="button" class="submit-btn">去处理</button>
+            <view class="submit-btn {{selectedId ? 'submit-btn-active' : ''}}" catchtap="handleItem">去处理</view>
         </block>
         <image src="../../assets/images/img_nodata.png" class="no-data-img" wx:if="{{noTodoList}}"></image>
     </view>

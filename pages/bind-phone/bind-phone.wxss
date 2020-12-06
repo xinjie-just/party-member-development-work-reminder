@@ -15,17 +15,19 @@
   display: block;
   margin-top: 120rpx;
 }
+.form-control {
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  padding-right: 24rpx;
+  padding-left: 24rpx;
+}
 .form-control-item {
   display: flex;
   flex-direction: row;
-  padding-right: 24rpx;
-  padding-left: 24rpx;
   height: 96rpx;
   line-height: 96rpx;
-  border-top: 1px solid #E5E5E5;
 }
-.form-control-item:last-of-type {
-  border-top: 1px solid #E5E5E5;
+.form-control-item:not(:last-of-type) {
   border-bottom: 1px solid #E5E5E5;
 }
 .form-control-label {
@@ -41,14 +43,14 @@
   line-height: 96rpx;
 }
 .submit-btn {
-  margin-top: 40rpx;
+  display: block;
+  margin: 40rpx auto 0;
   width: 400rpx;
   height: 98rpx;
   background: #E41E35;
   border-radius: 49rpx;
   font-size: 36rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
   color: #FFFFFF;
-  line-height: 50rpx;
+  line-height: 98rpx;
+  text-align: center;
 }

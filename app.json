@@ -1,17 +1,18 @@
 {
-  "pages":[
-    "pages/index/index",
-    "pages/bind-phone/bind-phone",
+  "pages": [
     "pages/wechat-login/wechat-login",
+    "pages/bind-phone/bind-phone",
     "pages/login/login",
-    "pages/mine/mine",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/index/index",
+    "pages/index/detail/detail",
+    "pages/mine/mine"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#A5131C",
     "navigationBarTitleText": "党员发展工作提醒",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "list": [

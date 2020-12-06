@@ -1,25 +1,24 @@
-@import "../../assets/styles/common-background.wxss";
-
+page {
+  background-color: #f8f8f8;
+}
 .header {
   width: 750rpx;
   height: 484rpx;
   background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
-  border-bottom-right-radius: 200rpx 100rpx;
-  border-bottom-left-radius: 200rpx 100rpx;
+  border-bottom-right-radius: 60rpx 20rpx;
+  border-bottom-left-radius: 60rpx 20rpx;
   color: #fff;
   padding: 70rpx 58rpx 220rpx;
   box-sizing: border-box;
 }
-.welcome {
+.header .welcome {
   display: block;
   font-size: 40rpx;
-  font-weight: 400;
   line-height: 40rpx;
   margin-bottom: 30rpx;
 }
-.tips {
+.header .tips {
   font-size: 46rpx;
-  font-weight: 400;
   line-height: 46rpx;
 }
 .todo-container {
@@ -31,20 +30,28 @@
   box-sizing: border-box;
   padding: 20rpx 30rpx 60rpx;
 }
-
-.todo-item {
-  display: block;
-  height: 112rpx;
-  line-height: 112rpx;
+.todo-container .todo-list {
   font-size: 32rpx;
-  font-weight: 400;
-  color: #333333;
+  max-height: calc((60rpx + 26rpx + 26rpx) * 7);
+  overflow-y: auto;
 }
-.todo-item:not(:last-of-type) {
+.todo-container .todo-item {
+  display: block;
+  line-height: 56rpx;
+  padding-top: 28rpx;
+  padding-bottom: 28rpx;
+  color: #333333;
+  word-break: break-all;
+}
+.todo-container .todo-item:not(:last-of-type) {
   border-bottom: 1rpx solid #e5e5e5;
 }
-.submit-btn {
-  margin-top: 20rpx;
+.todo-container .todo-item-active {
+  font-weight: 500;
+  color: #C8273A;
+}
+.todo-container .submit-btn {
+  margin: 20rpx auto 0;
   width: 500rpx;
   height: 98rpx;
   line-height: 98rpx;
@@ -53,12 +60,15 @@
   background-color: #fff;
   border: 1px solid #E5E5E5;
   font-size: 36rpx;
-  font-weight: 400;
   color: #333333;
   padding: 0;
   box-sizing: border-box;
 }
-.no-data-img {
+.todo-container .submit-btn-active {
+  background: #E41E35;
+  color: #ffffff;
+}
+.todo-container .no-data-img {
   display: block;
   width: 240rpx;
   height: 240rpx;
