@@ -34,7 +34,8 @@ App({
     })
   },
   globalData: {
-    host: 'https://ddh.datagrand.com/',
+    host: 'https://www.guizhouyichenjing.com/',
+    wss: 'https://www.guizhouyichenjing.com',
     userInfo: null
   }
 })

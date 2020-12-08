@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    name: '',
+    password: '',
     showClearNameBtn: false,
     isNameWaring: false,
     phone: '',
@@ -17,7 +17,7 @@ Page({
   onInput(evt) {
     const {value} = evt.detail;
     const {name} = evt.currentTarget.dataset;
-    if (name === 'name') {
+    if (name === 'password') {
       this.setData({
         name: value,
         isNameWaring: !value.trim(),
@@ -36,7 +36,7 @@ Page({
 
   onClear(evt) {
     const {name} = evt.currentTarget.dataset;
-    if (name === 'name') {
+    if (name === 'password') {
       this.setData({
         name: '',
         isNameWaring: true,
@@ -54,7 +54,7 @@ Page({
 
   onConfirm() {
     this.setData({
-      isNameWaring: !this.data.name.length,
+      isNameWaring: !this.data.password.length,
       isPhoneWaring: !this.data.phone.length,
     });
     const valid = !(isNameWaring || isPhoneWaring);
