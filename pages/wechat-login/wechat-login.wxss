@@ -38,15 +38,20 @@
   color: #aaa;
 }
 
-.submit-btn {
-  width: 400rpx;
-  height: 98rpx;
+.submit-container {
+  width: 400rpx !important;
+  height: 98rpx !important;
+  line-height: 98rpx !important;
+  text-align: center !important;
+  background-color: #E41E35 !important;
+  border-radius: 49rpx !important;
+  font-size: 36rpx !important;
+  color: #fff !important;
+}
+.submit-container button {
+  color: #ffffff;
   line-height: 98rpx;
-  text-align: center;
-  background: #E41E35;
-  border-radius: 49rpx;
-  font-size: 36rpx;
-  color: #fff;
+  padding: 0;
 }
 
 .usermotto {

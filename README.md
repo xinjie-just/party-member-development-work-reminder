@@ -6,11 +6,13 @@
 
 1. 原型图地址:
 
-2. 效果图地址：[效果图地址](https://lanhuapp.com/url/9LD3n-unN4K)
+2. 效果图地址(蓝湖)：[https://lanhuapp.com/url/9LD3n-unN4K](https://lanhuapp.com/url/9LD3n-unN4K)
 
-3. API 地址:
+3. API地址(swagger): [https://www.guizhouyichenjing.com/swagger-ui/](https://www.guizhouyichenjing.com/swagger-ui/)
 
-4. 小程序基本信息
+4. servers 地址: [https://www.guizhouyichenjing.com:443](https://www.guizhouyichenjing.com:443)
+
+5. 小程序基本信息
 
 - 小程序名称：发展工作提醒
 - 小程序简称：工作提醒
