@@ -2,11 +2,12 @@
   "pages": [
     "pages/wechat-login/wechat-login",
     "pages/bind-phone/bind-phone",
-    "pages/login/login",
-    "pages/logs/logs",
     "pages/index/index",
     "pages/index/detail/detail",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/mine/subscribe-remind/subscribe-remind",
+    "pages/mine/change-password/change-password",
+    "pages/index/process/process"
   ],
   "window": {
     "backgroundTextStyle": "light",

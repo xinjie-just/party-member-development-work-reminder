@@ -1,18 +1,10 @@
-// pages/search/search.js
+// pages/index/process/process.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-  },
-
-  subscribeRemind() {
-
-  },
-
-  changePassword() {
 
   },
 

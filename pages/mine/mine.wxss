@@ -1,1 +1,82 @@
-/* pages/search/search.wxss */
+page {
+  background-color: #f8f8f8;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 750rpx;
+  height: 330rpx;
+  background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
+  color: #fff;
+  padding: 50rpx 0 120rpx 28rpx;
+  box-sizing: border-box;
+}
+.header .user {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+.header .user .iconfont {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 130rpx;
+  overflow: hidden;
+  border-radius: 50%;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 70rpx;
+  background-color: #c6323b;
+  color: #fff;
+  margin-right: 30rpx;
+}
+.header .user .nickname {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+.header .user .phone {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+.header .logout {
+  height: 66rpx;
+  line-height: 66rpx;
+  padding-left: 30rpx;
+  padding-right: 24rpx;
+  font-size: 30rpx;
+  color: #fff;
+  background-color: #a5131c;
+  border-top-left-radius: 100rpx;
+  border-bottom-left-radius: 100rpx;
+}
+.header .logout .iconfont {
+  margin-right: 16rpx;
+}
+
+.todo-list {
+  width: 694rpx;
+  background: #FFFFFF;
+  box-shadow: 0px 4rpx 24rpx 0px rgba(52, 80, 106, 0.1);
+  border-radius: 14rpx;
+  margin: -110rpx auto 0;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  color: #333;
+}
+.todo-list .todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 96rpx;
+  line-height: 96rpx;
+  padding-right: 24rpx;
+  padding-left: 24rpx;
+  color: #333333;
+}
+.todo-list .todo-item:not(:last-of-type) {
+  line-height: calc(96rpx - 1rpx);
+  border-bottom: 1rpx solid #e5e5e5;
+}

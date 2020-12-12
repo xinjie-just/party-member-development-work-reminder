@@ -1,0 +1,32 @@
+/* pages/subscribe-remind.wxss */
+.page {
+  padding-top: 160rpx;
+}
+.subscribe-remind-img {
+  display: block;
+  width: 184rpx;
+  height: 162rpx;
+  margin: 0 auto 30rpx;
+}
+.subscribe-remind-text {
+  display: block;
+  max-width: 600rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  color: #333;
+  margin: 0 auto 80rpx;
+  text-align: center;
+}
+
+.subscribe-remind-btn {
+  width: 400rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  text-align: center;
+  border-radius: 98rpx;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #e41e35;
+  color: #fff;
+  font-size: 36rpx;
+}

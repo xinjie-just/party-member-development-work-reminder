@@ -1,0 +1,59 @@
+<!--pages/index/process/process.wxml-->
+<view class="page">
+  <view class="header">
+    <image src="/assets/images/banner@3x.png" alt="发展党员流程图鉴" class="banner"></image>
+  </view>
+    <!-- 
+      -- 流程条数为X给 process-list 加上 process-list-X 类
+      -- 如流程条数为6给 process-list 加上 process-list-6 类
+      -- 默认为5条
+    -->
+  <view class="process-list">
+    <!-- 
+      -- 进行中状态给 process-item 加上 active 类
+      -- 已完成状态给 process-item 加上 completed 类
+    -->
+    <view class="process-item active">
+      <text class="process-index">1</text>
+      <text class="process-text">入党申请</text>
+    </view>
+    <view class="process-item">
+      <text class="process-index">2</text>
+      <text class="process-text">入党积极分子</text>
+    </view>
+    <view class="process-item">
+      <text class="process-index">3</text>
+      <text class="process-text">确定发展对象</text>
+    </view>
+    <view class="process-item">
+      <text class="process-index">4</text>
+      <text class="process-text">接受预备党员</text>
+    </view>
+    <view class="process-item">
+      <text class="process-index">5</text>
+      <text class="process-text">转为正式党员</text>
+    </view>
+  </view>
+  <view class="step-container">
+    <view class="step-list">
+    <!-- 
+      -- 进行中状态给 step-item 加上 active 类
+      -- 已完成状态给 step-item 加上 completed 类
+    -->
+      <view class="step-item">
+        <view class="step-text">
+          <view class="which-step">第<text class="num">1</text>步</view>
+          <text class="things">递交入党申请书</text>
+        </view>
+        <view class="step-status">待开始</view>
+      </view>
+      <view class="step-item">
+        <view class="step-text">
+          <view class="which-step">第<text class="num">2</text>步</view>
+          <text class="things">组织派人谈话</text>
+        </view>
+        <view class="step-status">待开始</view>
+      </view>
+    </view>
+  </view>
+</view>

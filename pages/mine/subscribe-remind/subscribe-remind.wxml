@@ -1,0 +1,5 @@
+<view class="page">
+  <image src="/assets/images/img_7_tips@3x.png" alt="订阅提醒" class="subscribe-remind-img"> </image>
+  <text class="subscribe-remind-text">订阅发展党员流程提醒</text>
+  <view class="subscribe-remind-btn">同意订阅</view>
+</view>

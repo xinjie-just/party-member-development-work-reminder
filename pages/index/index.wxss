@@ -3,12 +3,12 @@ page {
 }
 .header {
   width: 750rpx;
-  height: 484rpx;
+  height: 464rpx;
   background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
   border-bottom-right-radius: 60rpx 20rpx;
   border-bottom-left-radius: 60rpx 20rpx;
   color: #fff;
-  padding: 70rpx 58rpx 220rpx;
+  padding: 54rpx 58rpx 220rpx;
   box-sizing: border-box;
 }
 .header .welcome {
@@ -34,6 +34,14 @@ page {
   font-size: 32rpx;
   max-height: calc((60rpx + 26rpx + 26rpx) * 7);
   overflow-y: auto;
+  background-image: linear-gradient(to bottom, white 15px, hsla(0, 0%, 100%, 0)),
+  radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+  linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
+  radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
+  background-repeat: no-repeat;
+  background-position: top center, top center, bottom center, bottom center;
+  background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
+  background-attachment: local, scroll, local, scroll;
 }
 .todo-container .todo-item {
   display: block;

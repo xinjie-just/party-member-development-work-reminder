@@ -6,16 +6,30 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5091957",
+      "name": "cms-右",
+      "font_class": "right-arrow",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "18773212",
+      "name": "ic_quit",
+      "font_class": "quit",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
       "icon_id": "18529004",
       "name": "ic_4_step",
-      "font_class": "ic_4_step",
+      "font_class": "step",
       "unicode": "e662",
       "unicode_decimal": 58978
     },
     {
       "icon_id": "18529005",
       "name": "ic_4_name",
-      "font_class": "ic_4_name",
+      "font_class": "user",
       "unicode": "e663",
       "unicode_decimal": 58979
     }

@@ -1,2 +1,25 @@
-<!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<view class="page">
+    <view class="header">
+        <view class="user">
+          <text class="iconfont icon-user"></text>
+          <view class="nickname-phone">
+            <text class="nickname">张三</text>
+            <text class="phone">18227752001</text>
+          </view>
+        </view>
+        <view class="logout">
+          <text class="iconfont icon-quit"></text>
+          <text>退出</text>
+        </view>
+    </view>
+    <view class="todo-list">
+        <view class="todo-item subscribe-remind" catchtap="subscribeRemind">
+          <text class="text">订阅提醒</text>
+          <text class="iconfont icon-right-arrow"></text>
+        </view>
+        <view class="todo-item change-password" catchtap="changePassword">
+          <text class="text">修改密码</text>
+          <text class="iconfont icon-right-arrow"></text>
+        </view>
+    </view>
+</view>

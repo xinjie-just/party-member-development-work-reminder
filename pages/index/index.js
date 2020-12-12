@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    noTodoList: true,
+    noTodoList: false,
     todoList: [],
     selectedId: null
   },

@@ -50,12 +50,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -96,9 +90,26 @@
           "scene": null
         },
         {
-          "id": -1,
-          "name": "pages/bind-phone/bind-phone",
-          "pathName": "pages/index/index",
+          "name": "pages/mine/mine",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/subscribe-remind/subscribe-remind",
+          "pathName": "pages/mine/subscribe-remind/subscribe-remind",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/mine/change-password/change-password",
+          "pathName": "pages/mine/change-password/change-password",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/process/process",
+          "pathName": "pages/index/process/process",
           "query": "",
           "scene": null
         }

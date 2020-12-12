@@ -1,4 +1,4 @@
-// pages/qa/qa.js
+// pages/change-password/change-password.js
 Page({
 
   /**
