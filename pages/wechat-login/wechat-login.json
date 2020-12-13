@@ -1,4 +1,4 @@
 {
-  "component": true,
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "微信登录"
 }

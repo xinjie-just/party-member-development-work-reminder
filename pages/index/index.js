@@ -6,7 +6,8 @@ Page({
   data: {
     noTodoList: false,
     todoList: [],
-    selectedId: null
+    selectedId: null,
+    userName: ''
   },
   selectTodoItem(e) {
     console.log("evt111", e);
@@ -19,6 +20,12 @@ Page({
     console.log("selectedId",this.data.selectedId);
   },
   onLoad: function () {
+    const storageUserInfo = wx.getStorageSync('userInfo');
+    this.setData({
+      userName: storageUserInfo.realName || storageUserInfo.nickName
+    });
+    this.getTodoList();
+    
     this.setData({
       todoList: [
         { id: 1, title: 'AA,阶段节点待你确认' },
@@ -31,6 +38,27 @@ Page({
         { id: 8, title: 'HH,阶段节点待你确认' },
         { id: 9, title: 'II,阶段节点待你确认' }
       ]
+    })
+  },
+  getTodoList() {
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/queryUserToDoBusiness`,
+      data: {
+        pageNo: 1,
+        pageSize: 10
+      },
+      success(res) {
+        const value = res.data;
+        console.log("待办事项", value);
+        
+      },
+      fail() {
+        wx.showToast({
+          title: '待办事项获取失败！',
+          icon: "none",
+          duration: 2000
+        })
+      }
     })
   }
 })

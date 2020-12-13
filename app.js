@@ -34,8 +34,19 @@ App({
     })
   },
   globalData: {
-    host: 'https://www.guizhouyichenjing.com/',
-    wss: 'https://www.guizhouyichenjing.com',
+    host: 'https://www.guizhouyichenjing.com:443',
+    hostname: 'https://www.guizhouyichenjing.com',
+    wss: 'wss://www.guizhouyichenjing.com:443',
+    wssname: 'wss://www.guizhouyichenjing.com',
     userInfo: null
+    // userInfo: {
+    //   avatarUrl: "",
+    //   gender: 1,
+    //   nickName: "",
+    //   country: "",
+    //   province: "",
+    //   city: "",
+    //   language: ""
+    // }
   }
 })

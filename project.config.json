@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -110,6 +110,12 @@
         {
           "name": "pages/index/process/process",
           "pathName": "pages/index/process/process",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/password-login/password-login",
+          "pathName": "pages/password-login/password-login",
           "query": "",
           "scene": null
         }

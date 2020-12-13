@@ -149,8 +149,6 @@ page {
   background-attachment: local, scroll, local, scroll;
 }
 
-.step-list {
-}
 .step-item {
   background-color: #fff;
   box-shadow: 0 4rpx 24rpx 0 rgba(52, 80, 106, 0.1);

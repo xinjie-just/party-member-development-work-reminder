@@ -23,6 +23,8 @@
 
 微信小程序官方文档：`https://developers.weixin.qq.com/miniprogram/dev/framework/`
 
+小程序获取手机号：`https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/getPhoneNumber.html`
+
 WXSS 标准：`https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html`
 
 事件标准：`https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html`
