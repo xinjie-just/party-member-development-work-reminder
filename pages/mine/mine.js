@@ -1,11 +1,14 @@
-// pages/search/search.js
+// pages/mine/mine.js
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userName: '',
+    phone: ''
   },
 
   subscribeRemind() {
@@ -20,7 +23,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const storageUserInfo = wx.getStorageSync('userInfo');
+    this.setData({
+      userName: storageUserInfo.realName || storageUserInfo.nickName,
+      phone: storageUserInfo.phone
+    })
   },
 
   /**

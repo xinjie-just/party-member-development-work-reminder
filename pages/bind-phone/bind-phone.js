@@ -89,6 +89,11 @@ Page({
               ...userInfoApp,
               ...userInfobindRes
             }
+            setTimeout(() => {
+              wx.switchTab({
+                url: '../index/index',
+              });
+            }, 2000);
           } else {
             wx.showToast({
               title: value.message,
@@ -96,11 +101,6 @@ Page({
               icon: "none"
             });
           }
-          setTimeout(() => {
-            wx.switchTab({
-              url: '../index/index',
-            });
-          }, 2000);
         },
         fail() {
           wx.showToast({

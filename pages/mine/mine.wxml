@@ -3,8 +3,8 @@
         <view class="user">
           <text class="iconfont icon-user"></text>
           <view class="nickname-phone">
-            <text class="nickname">张三</text>
-            <text class="phone">18227752001</text>
+            <text class="nickname">{{userName}}</text>
+            <text class="phone">{{phone}}</text>
           </view>
         </view>
         <view class="logout">
