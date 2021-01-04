@@ -61,6 +61,9 @@ Page({
           phone: this.data.phone,
           realName: this.data.username
         },
+        header: {
+          accessSide: "weixin"
+        },
         success(res) {
           const value = res.data;
           if (value.code === 200) {

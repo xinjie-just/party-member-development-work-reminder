@@ -16,7 +16,9 @@ Page({
   },
 
   changePassword() {
-
+    wx.redirectTo({
+      url: '../change-password/change-password',
+    });
   },
 
   /**

@@ -66,6 +66,7 @@ Page({
       userInfo: e.detail.userInfo,
       // hasUserInfo: true
     });
+    let that = this;
     wx.login({
       success(data) {
         console.log("code", data.code);
@@ -77,20 +78,16 @@ Page({
               code: data.code
             },
             success(value) {
-              const data = value.data;
-              if (data.code === 200) {
-                wx.setStorageSync("openid", data.data.openid);
-                wx.setStorageSync("sessionKey", data.data.sessionKey);
+              const info = value.data;
+              if (info.code === 200) {
+                wx.setStorageSync("openid", info.data.openid);
+                wx.setStorageSync("sessionKey", info.data.sessionKey);
                 wx.showToast({
                   title: '身份信息获取成功',
                   icon: "none",
                   duration: 2000
                 });
-                setTimeout(() => {
-                  wx.redirectTo({
-                    url: '../bind-phone/bind-phone',
-                  });
-                }, 2000);
+                that.queryUser(info.data.openid);
               } else {
                 wx.showToast({
                   title: `${value.data.message}`,
@@ -113,6 +110,39 @@ Page({
             icon: "none",
             duration: 3000
           });
+        }
+      }
+    })
+  },
+
+  // 通过微信openid查询用户信息，如果查询到有用户，就证明绑定过手机号了
+  // /miniProgram/queryUserByOpenId
+  queryUser(openId) {
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/queryUserByOpenId`,
+      data: {
+        openId
+      },
+      header: {
+        accessSide: "weixin"
+      },
+      success(value) {
+        const info = value.data;
+        if (info.code === 200) {
+          if (info.data) {
+            // 绑定过手机号了
+            setTimeout(() => {
+              wx.switchTab({
+                url: '../index/index',
+              });
+            }, 2000);
+          } else {
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../bind-phone/bind-phone',
+              });
+            }, 2000);
+          }
         }
       }
     })

@@ -1,13 +1,13 @@
 <view class="page">
     <view class="header">
         <text class="welcome">您好，{{userName}}</text>
-        <text wx:if="{{!noTodoList}}" class="tips">您有如下代办事项</text>
+        <text wx:if="{{!todoList}}" class="tips">您有如下代办事项</text>
         <text wx:if="{{noTodoList}}" class="tips">您暂无代办事项</text>
     </view>
     <view class="todo-container">
         <block wx:if="{{!noTodoList}}">
             <view class="todo-list">
-                <text class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">{{item.title}}</text>
+                <text class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">{{item.realName}}在{{item.nodeName}}，待你处理</text>
             </view>
             <view class="submit-btn {{selectedId ? 'submit-btn-active' : ''}}" catchtap="handleItem">去处理</view>
         </block>

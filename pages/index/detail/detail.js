@@ -1,18 +1,103 @@
 // pages/index/detail/detail.js
+//获取应用实例
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    id: null,
+    realName: '',
+    nodeName: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("代办事项ID", options.id);
+    this.setData({
+      id: options.id,
+      realName: options.realName,
+      nodeName: options.nodeName
+    });
+    this.updateTaskReadTime(this.data.id);
+  },
 
+  // 更新任务阅读时间
+  updateTaskReadTime(id) {
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/updateTaskReadTime`,
+      data: {
+        id
+      },
+      method: "POST",
+      header: {
+        accessSide: "weixin"
+      },
+      success(res) {
+        const info = res.data;
+        if (info.code === 200) {
+          // wx.showToast({
+          //   title: info.message || '更新任务阅读时间成功！',
+          //   icon: "none",
+          //   duration: 3000
+          // });
+        } else {
+          wx.showToast({
+            title: info.message || '更新任务阅读时间失败！',
+            icon: "none",
+            duration: 3000
+          });
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: '更新任务阅读时间失败！'+ res.error,
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
+  },
+
+  // 处理提醒事项
+  handleTask() {
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/handleRemindTask`,
+      data: {
+        id: this.data.id
+      },
+      method: "POST",
+      header: {
+        accessSide: "weixin"
+      },
+      success(res) {
+        const info = res.data;
+        if (info.code === 200) {
+          wx.showToast({
+            title: info.message || '代办事项办理成功！',
+            icon: "none",
+            duration: 3000
+          });
+        } else {
+          wx.showToast({
+            title: info.message || '代办事项办理失败！',
+            icon: "none",
+            duration: 3000
+          });
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: '代办事项办理失败！'+ res.error,
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**

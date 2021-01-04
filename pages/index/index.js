@@ -18,6 +18,18 @@ Page({
   handleItem() {
     if(!this.data.selectedId) return;
     console.log("selectedId",this.data.selectedId);
+    const selectedId = this.data.selectedId;
+    let realName = '';
+    let nodeName = '';
+    this.data.todoList.forEach(item => {
+      if(item.id === selectedId) {
+        realName = item.realName;
+        nodeName = item.nodeName;
+      }
+    })
+    wx.redirectTo({
+      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}`,
+    })
   },
   onLoad: function () {
     const storageUserInfo = wx.getStorageSync('userInfo');
@@ -25,36 +37,41 @@ Page({
       userName: storageUserInfo.realName || storageUserInfo.nickName
     });
     this.getTodoList();
-    
-    this.setData({
-      todoList: [
-        { id: 1, title: 'AA,阶段节点待你确认' },
-        { id: 2, title: 'BB,阶段节点待你确认' },
-        { id: 3, title: 'CC,阶段节点待你确认' },
-        { id: 4, title: 'DD,阶段节点待你确认' },
-        { id: 5, title: 'EE,阶段节点待你确认' },
-        { id: 6, title: 'FF,阶段节点待你确认' },
-        { id: 7, title: 'GG,阶段节点待你确认' },
-        { id: 8, title: 'HH,阶段节点待你确认' },
-        { id: 9, title: 'II,阶段节点待你确认' }
-      ]
-    })
   },
   getTodoList() {
+    let that = this;
     wx.request({
       url: `${app.globalData.hostname}/miniProgram/queryUserToDoBusiness`,
       data: {
         pageNo: 1,
         pageSize: 10
       },
-      success(res) {
-        const value = res.data;
-        console.log("待办事项", value);
-        
+      header: {
+        accessSide: "weixin"
       },
-      fail() {
+      success(res) {
+        const info = res.data;
+        console.log("待办事项", info.data);
+        if (info.code === 200) {
+          that.setData({
+            todoList: info.data,
+            noTodoList: !!info.data.length
+          });
+        } else {
+          that.setData({
+            todoList: [],
+            noTodoList: true
+          });
+          wx.showToast({
+            title: info.message || '待办事项获取失败',
+            icon: "none",
+            duration: 3000
+          });
+        }
+      },
+      fail(res) {
         wx.showToast({
-          title: '待办事项获取失败！',
+          title: '待办事项获取失败！'+ res.error,
           icon: "none",
           duration: 2000
         })
