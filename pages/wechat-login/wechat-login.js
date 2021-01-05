@@ -131,17 +131,18 @@ Page({
         if (info.code === 200) {
           if (info.data) {
             // 绑定过手机号了
+            wx.setStorageSync("userOtherInfo", info.data);
             setTimeout(() => {
               wx.switchTab({
                 url: '../index/index',
               });
-            }, 2000);
+            }, 500);
           } else {
             setTimeout(() => {
               wx.redirectTo({
                 url: '../bind-phone/bind-phone',
               });
-            }, 2000);
+            }, 500);
           }
         }
       }

@@ -48,8 +48,8 @@ page {
   text-align: center;
   line-height: 36rpx;
   color: #333;
-  padding-right: 0.7em;
-  padding-left: 0.7em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }
 .process-list.process-list-3::before {
   right: calc(100% / 3 / 2);
@@ -92,6 +92,7 @@ page {
 .process-item:nth-last-of-type(7):first-of-type ~ .process-item {
   width: calc(100% / 7);
 } */
+/*wxss不支持兄弟元素选择器*/
 .process-item {
   width: 20%;
 }

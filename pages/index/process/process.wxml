@@ -24,20 +24,16 @@
     <!-- 
       -- 进行中状态给 step-item 加上 active 类
       -- 已完成状态给 step-item 加上 completed 类
+      -- nodeState 已完成1/已开始未完成0/未开始-1
     -->
-      <view class="step-item">
+      <view class="step-item" wx:for="{{currentStageInfo}}" wx:key="index">
         <view class="step-text">
-          <view class="which-step">第<text class="num">1</text>步</view>
-          <text class="things">递交入党申请书</text>
+          <view class="which-step">第<text class="num">{{index + 1}}</text>步</view>
+          <text class="things">{{item.nodeName}}</text>
         </view>
-        <view class="step-status">待开始</view>
-      </view>
-      <view class="step-item">
-        <view class="step-text">
-          <view class="which-step">第<text class="num">2</text>步</view>
-          <text class="things">组织派人谈话</text>
-        </view>
-        <view class="step-status">待开始</view>
+        <view class="step-status completed" wx:if="{{item.nodeState === 1}}">已完成</view>
+        <view class="step-status active" wx:elif="{{item.nodeState === 0}}">进行中</view>
+        <view class="step-status" wx:else>待开始</view>
       </view>
     </view>
   </view>

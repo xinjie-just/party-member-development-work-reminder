@@ -8,19 +8,28 @@ Page({
    */
   data: {
     stages: [],
-    selectedIdStage: null
+    selectedIdStage: null,
+    idUser: null,
+    phoneNum: null,
+    allNodeStateInfo: [],
+    currentStageInfo: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const userOtherInfo = wx.getStorageSync("userOtherInfo");
+    this.setData({
+      idUser: userOtherInfo.idUser,
+      phoneNum: userOtherInfo.phoneNum
+    })
+    console.log("通过openid获取到的用户信息", userOtherInfo);
     this.queryAllStage();
+    this.queryPersonAllNodeState();
   },
 
-  // /miniProgram/queryPersonAllNodeState 查询个人用户所有节点状态
-
-  //查询所有阶段/stageNode/queryAllStage
+  //查询所有阶段
   queryAllStage() {
     let that = this;
     wx.request({
@@ -44,8 +53,12 @@ Page({
             }
           })
           that.setData({
-            stages
+            stages,
+            selectedIdStage: stages.length ? stages[0].idStage : null //默认第一个阶段被选择
           });
+          if (that.data.selectedIdStage) {
+            that.getStepStateInfo(); // 设置默认的阶段后，去获取下面的步骤和状态信息
+          }
         } else {
           that.setData({
             stages: [],
@@ -69,12 +82,64 @@ Page({
 
   // 选择某一个阶段
   selectProcessItem(e) {
-    // idStage e.currentTarget.dataset.id
     console.log("选择的对象", e.currentTarget.dataset);
     const selectedIdStage = e.currentTarget.dataset.id
     this.setData({
       selectedIdStage
     });
+    this.getStepStateInfo();
+  },
+
+  //查询个人用户所有节点状态
+  queryPersonAllNodeState() {
+    let that = this;
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/queryPersonAllNodeState`,
+      data: {
+        idUser: this.data.idUser
+      },
+      header: {
+        accessSide: "weixin"
+      },
+      success(res) {
+        const info = res.data;
+        console.log("所有节点状态", info.data);
+        if (info.code === 200) {
+          that.setData({
+            allNodeStateInfo: info.data,
+          });
+        } else {
+          that.setData({
+            allNodeStateInfo: [],
+          });
+          wx.showToast({
+            title: info.message || '查询个人用户所有节点状态失败',
+            icon: "none",
+            duration: 3000
+          });
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: '查询个人用户所有节点状态失败！'+ res.error,
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
+  },
+
+  // 个人用户所有节点状态去匹配当前的步骤
+  getStepStateInfo() {
+    let currentStageInfo = [];
+    this.data.allNodeStateInfo.map(item => {
+      if (this.data.selectedIdStage === item.idStage) {
+        currentStageInfo.push(item);
+      }
+    });
+    this.setData({
+      currentStageInfo
+    })
   },
 
   /**
