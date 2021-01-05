@@ -4,10 +4,10 @@ const app = getApp()
 
 Page({
   data: {
-    noTodoList: false,
     todoList: [],
     selectedId: null,
-    userName: ''
+    userName: '',
+    total: 0
   },
   selectTodoItem(e) {
     console.log("evt111", e);
@@ -55,13 +55,13 @@ Page({
         console.log("待办事项", info.data);
         if (info.code === 200) {
           that.setData({
-            todoList: info.data,
-            noTodoList: !!info.data.length
+            todoList: info.data.page.records,
+            total: info.data.page.total
           });
         } else {
           that.setData({
             todoList: [],
-            noTodoList: true
+            total: 0
           });
           wx.showToast({
             title: info.message || '待办事项获取失败',

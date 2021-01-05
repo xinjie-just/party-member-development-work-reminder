@@ -12,6 +12,6 @@
         <input type="text" id="phone" class="form-control-input" placeholder="请输入手机号" value="{{phone}}" bindinput="onInput"/>
       </view>
     </view>
-    <view class="submit-btn" catchtap="bindPhone">确定</view>
+    <view class="submit-btn {{valid ? '' : 'disabled'}}" catchtap="bindPhone">确定</view>
   </form>
 </view>

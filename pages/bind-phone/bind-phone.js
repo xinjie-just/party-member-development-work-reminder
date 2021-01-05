@@ -8,21 +8,45 @@ Page({
   data: {
     username: '',
     phone: '',
+    phoneValid: false,
+    usernameValid: false,
+    valid: false
   },
 
   onInput(evt) {
     const {value} = evt.detail;
     const {id} = evt.currentTarget;
+    const PHONE_REG_EXP = /^1\d{10}$/;
+    let result = false;
+    if (id === 'phone') {
+      result = PHONE_REG_EXP.test(value);
+      if (result) {
+        this.setData({
+          phoneValid: true,
+          phone: value
+        });
+      } else {
+        this.setData({
+          phoneValid: false
+        });
+      }
+    }
     if (id === 'username') {
       this.setData({
-        username: value,
-      })
+        usernameValid: !!value,
+      });
+      if (this.data.usernameValid) {
+        this.setData({
+          username: value,
+        });
+      }
     }
-    if (id === 'phone') {
-      this.setData({
-        phone: value,
-      })
-    }    
+
+    const phoneValid = this.data.phoneValid;
+    const usernameValid = this.data.usernameValid;
+    this.setData({
+      valid: phoneValid && usernameValid
+    })
   },
 
   /**
@@ -41,12 +65,12 @@ Page({
   },
 
   bindPhone() {
-    if (!this.data.phone) {
+    if (!this.data.phoneValid) {
       wx.showToast({
-        title: '手机号不能为空',
+        title: '手机号格式不对',
         icon: "none"
       });
-    } else if (!this.data.username) {
+    } else if (!this.data.usernameValid) {
       wx.showToast({
         title: '姓名不能为空',
         icon: "none"
