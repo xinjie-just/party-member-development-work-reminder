@@ -35,7 +35,8 @@ Page({
     wx.request({
       url: `${app.globalData.hostname}/stageNode/queryAllStage`,
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(res) {
         const info = res.data;
@@ -99,7 +100,8 @@ Page({
         idUser: this.data.idUser
       },
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(res) {
         const info = res.data;

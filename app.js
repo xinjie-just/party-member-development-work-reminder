@@ -38,7 +38,10 @@ App({
     hostname: 'https://www.guizhouyichenjing.com',
     wss: 'wss://www.guizhouyichenjing.com:443',
     wssname: 'wss://www.guizhouyichenjing.com',
-    userInfo: null
+    userInfo: null,
+
+    //15982280387
+    //280387
     // userInfo: {
     //   avatarUrl: "",
     //   gender: 1,

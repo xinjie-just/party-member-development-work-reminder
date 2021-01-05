@@ -77,11 +77,15 @@ Page({
             data: {
               code: data.code
             },
+            header: {
+              accessSide: "weixin"
+            },
             success(value) {
               const info = value.data;
               if (info.code === 200) {
                 wx.setStorageSync("openid", info.data.openid);
                 wx.setStorageSync("sessionKey", info.data.sessionKey);
+                wx.setStorageSync('token', info.data.token);
                 wx.showToast({
                   title: '身份信息获取成功',
                   icon: "none",
@@ -124,7 +128,8 @@ Page({
         openId
       },
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(value) {
         const info = value.data;
@@ -145,6 +150,13 @@ Page({
             }, 500);
           }
         }
+      },
+      fail(res) {
+        wx.showToast({
+          title: res.error,
+          icon: "none",
+          duration: 2000
+        })
       }
     })
   },

@@ -35,7 +35,8 @@ Page({
       },
       method: "POST",
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(res) {
         const info = res.data;
@@ -72,7 +73,8 @@ Page({
       },
       method: "POST",
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(res) {
         const info = res.data;

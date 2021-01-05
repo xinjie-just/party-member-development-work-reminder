@@ -1,4 +1,6 @@
 // pages/password-login/password-login.js
+const app = getApp()
+
 Page({
 
   /**
@@ -6,62 +8,84 @@ Page({
    */
   data: {
     password: '',
-    showClearPasswordBtn: false,
-    isPasswordWaring: false,
     phone: '',
-    showClearPhoneBtn: false,
-    isPhoneWaring: false
+    phoneValid: false,
+    passwordValid: false
   },
 
   onInput(evt) {
     const {value} = evt.detail;
     const {name} = evt.currentTarget.dataset;
+    const PHONE_REG_EXP = /^1\d{10}$/;
+    let result = false;
+    if (name === 'phone') {
+      result = PHONE_REG_EXP.test(value);
+      if (result) {
+        this.setData({
+          phoneValid: true,
+          phone: value
+        });
+      } else {
+        this.setData({
+          phoneValid: false
+        });
+      }
+    }
     if (name === 'password') {
       this.setData({
-        name: value,
-        isPasswordWaring: !value.trim(),
-        showClearPasswordBtn: !!value.length,
-      })
+        passwordValid: !!value,
+      });
+      if (this.data.passwordValid) {
+        this.setData({
+          password: value
+        });
+      }
     }
-    if (name === 'phone') {
-      this.setData({
-        phone: value,
-        isPhoneWaring: !value.trim(),
-        showClearPhoneBtn: !!value.length,
-      })
-    }
-    
-  },
-
-  onClear(evt) {
-    const {name} = evt.currentTarget.dataset;
-    if (name === 'password') {
-      this.setData({
-        name: '',
-        isPasswordWaring: true,
-        showClearPasswordBtn: false
-      })
-    }
-    if (name === 'phone') {
-      this.setData({
-        phone: '',
-        isPhoneWaring: true,
-        showClearPhoneBtn: false
-      })
-    }
-  },
-
-  onConfirm() {
-    this.setData({
-      isPasswordWaring: !this.data.password.length,
-      isPhoneWaring: !this.data.phone.length,
-    });
-    const valid = !(isPasswordWaring || isPhoneWaring);
-
   },
 
   submit() {
-
+    const phoneValid = this.data.phoneValid;
+    const passwordValid = this.data.passwordValid;
+    if (!(phoneValid && passwordValid)) {
+      return;
+    }
+    wx.request({
+      url: `${app.globalData.hostname}/user/phoneLogin`,
+      data: {
+        phone: this.data.phone,
+        password: this.data.password
+      },
+      method: "POST",
+      header: {
+        accessSide: "weixin"
+      },
+      success(value) {
+        const info = value.data;
+        if (info.code === 200) {
+          wx.setStorageSync("userOtherInfo", info.data.user);
+          wx.setStorageSync("userInfo", info.data.user);
+          wx.setStorageSync('token', info.data.token);
+          setTimeout(() => {
+            wx.switchTab({
+              url: '../index/index',
+            });
+          }, 500);
+        } else {
+          wx.showToast({
+            title: '登录失败' + info.message,
+            icon: "none",
+            duration: 2000
+          });
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: res.error,
+          icon: "none",
+          duration: 2000
+        });
+      }
+    });
   },
 
   /**

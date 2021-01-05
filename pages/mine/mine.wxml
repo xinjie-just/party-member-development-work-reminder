@@ -7,7 +7,7 @@
             <text class="phone">{{phone}}</text>
           </view>
         </view>
-        <view class="logout">
+        <view class="logout" catchtap="logout">
           <text class="iconfont icon-quit"></text>
           <text>退出</text>
         </view>

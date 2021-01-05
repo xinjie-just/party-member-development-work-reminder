@@ -47,7 +47,8 @@ Page({
         pageSize: 10
       },
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(res) {
         const info = res.data;

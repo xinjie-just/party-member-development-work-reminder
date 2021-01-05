@@ -12,12 +12,51 @@ Page({
   },
 
   subscribeRemind() {
-
+    wx.redirectTo({
+      url: './subscribe-remind/subscribe-remind',
+    });
   },
 
   changePassword() {
     wx.redirectTo({
-      url: '../change-password/change-password',
+      url: './change-password/change-password',
+    });
+  },
+
+  logout() {
+    wx.request({
+      url: `${app.globalData.hostname}/user/logout`,
+      header: {
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
+      },
+      success(value) {
+        const info = value.data;
+        if (info.code === 200) {
+          wx.clearStorageSync()
+          wx.showToast({
+            title: '账户退出成功！',
+            icon: "none",
+            duration: 2000
+          });
+          wx.redirectTo({
+            url: '../wechat-login/wechat-login',
+          });
+        } else {
+          wx.showToast({
+            title: '退出失败！' + info.message,
+            icon: "none",
+            duration: 2000
+          });
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: res.error,
+          icon: "none",
+          duration: 2000
+        });
+      }
     });
   },
 
@@ -28,7 +67,7 @@ Page({
     const storageUserInfo = wx.getStorageSync('userInfo');
     this.setData({
       userName: storageUserInfo.realName || storageUserInfo.nickName,
-      phone: storageUserInfo.phone
+      phone: storageUserInfo.phoneNum
     })
   },
 

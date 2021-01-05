@@ -62,7 +62,8 @@ Page({
           realName: this.data.username
         },
         header: {
-          accessSide: "weixin"
+          accessSide: "weixin",
+          Authorization: wx.getStorageSync("token")
         },
         success(res) {
           const value = res.data;
