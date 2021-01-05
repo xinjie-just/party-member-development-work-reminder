@@ -147,5 +147,12 @@ Page({
         }
       }
     })
+  },
+
+  // 手机号密码登录
+  phonePasswordLogin() {
+    wx.redirectTo({
+      url: '../password-login/password-login',
+    });
   }
 })

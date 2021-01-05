@@ -8,6 +8,8 @@
     <view class="submit-container">
       <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 同意 </button>
     </view>
+
+    <view class="phone-password-login-btn" catchtap="phonePasswordLogin">手机号密码登录</view>
   </block>
   <block wx:else>
     <image bindtap="bindViewTap" class="userinfo-avatar logo" src="{{userInfo.avatarUrl}}" mode="cover"></image>

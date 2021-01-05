@@ -54,6 +54,20 @@
   padding: 0;
 }
 
+.phone-password-login-btn {
+  display: block;
+  margin: 50rpx auto 0;
+  width: 500rpx;
+  height: 98rpx;
+  border-radius: 49rpx;
+  font-size: 36rpx;
+  line-height: 98rpx;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #E5E5E5;
+  color: #333333;
+}
+
 .usermotto {
   margin-top: 200px;
 }
