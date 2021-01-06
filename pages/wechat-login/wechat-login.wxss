@@ -48,10 +48,15 @@
   font-size: 36rpx;
   color: #fff;
 }
-.submit-container button {
-  color: #ffffff;
-  line-height: 98rpx;
-  padding: 0;
+#getUserInfoBtn {
+  width: 400rpx !important;
+  height: 98rpx !important;
+  line-height: 98rpx !important;
+  color: #ffffff !important;
+  padding: 0 !important;
+  background-color: #E41E35 !important;
+  border-radius: 49rpx !important;
+  font-size: 36rpx !important;
 }
 
 .phone-password-login-btn {

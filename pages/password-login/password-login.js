@@ -57,7 +57,8 @@ Page({
       },
       method: "POST",
       header: {
-        accessSide: "weixin"
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
       },
       success(value) {
         const info = value.data;
@@ -80,7 +81,7 @@ Page({
       },
       fail(res) {
         wx.showToast({
-          title: res.error,
+          title: '登录失败！' + res.error,
           icon: "none",
           duration: 2000
         });

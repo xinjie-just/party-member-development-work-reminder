@@ -6,7 +6,7 @@
     <text class="auth-describe">请允许微信授权以获取你的身份信息</text>
     <!-- <button class="submit-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 同意 </button> -->
     <view class="submit-container">
-      <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 同意 </button>
+      <button id="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 同意 </button>
     </view>
 
     <view class="phone-password-login-btn" catchtap="phonePasswordLogin">手机号密码登录</view>

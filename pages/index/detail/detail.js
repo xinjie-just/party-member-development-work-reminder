@@ -46,6 +46,15 @@ Page({
           //   icon: "none",
           //   duration: 3000
           // });
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../../wechat-login/wechat-login',
+          })
         } else {
           wx.showToast({
             title: info.message || '更新任务阅读时间失败！',
@@ -84,6 +93,15 @@ Page({
             icon: "none",
             duration: 3000
           });
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../../wechat-login/wechat-login',
+          })
         } else {
           wx.showToast({
             title: info.message || '代办事项办理失败！',

@@ -60,6 +60,15 @@ Page({
           if (that.data.selectedIdStage) {
             that.getStepStateInfo(); // 设置默认的阶段后，去获取下面的步骤和状态信息
           }
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../../wechat-login/wechat-login',
+          })
         } else {
           that.setData({
             stages: [],
@@ -110,6 +119,15 @@ Page({
           that.setData({
             allNodeStateInfo: info.data,
           });
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../../wechat-login/wechat-login',
+          })
         } else {
           that.setData({
             allNodeStateInfo: [],

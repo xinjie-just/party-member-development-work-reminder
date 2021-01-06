@@ -13,6 +13,21 @@ Page({
     valid: false
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    let username = '';
+    if (app.globalData.userInfo) {
+      username = app.globalData.userInfo.nickName;
+    } else if (wx.getStorageSync('userInfo')) {
+      username = wx.getStorageSync('userInfo').nickName;
+    }
+    this.setData({
+      username
+    });
+  },
+
   onInput(evt) {
     const {value} = evt.detail;
     const {id} = evt.currentTarget;
@@ -31,14 +46,23 @@ Page({
         });
       }
     }
-    if (id === 'username') {
+    if (this.data.username) {
       this.setData({
-        usernameValid: !!value,
+        usernameValid: true,
       });
-      if (this.data.usernameValid) {
+      this.setData({
+        username: value,
+      });
+    } else {
+      if (id === 'username') {
         this.setData({
-          username: value,
+          usernameValid: !!value,
         });
+        if (this.data.usernameValid) {
+          this.setData({
+            username: value,
+          });
+        }
       }
     }
 
@@ -47,21 +71,6 @@ Page({
     this.setData({
       valid: phoneValid && usernameValid
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let username = '';
-    if (app.globalData.userInfo) {
-      username = app.globalData.userInfo.nickName;
-    } else if (wx.getStorageSync('userInfo')) {
-      username = wx.getStorageSync('userInfo').nickName;
-    }
-    this.setData({
-      username
-    });
   },
 
   bindPhone() {
@@ -90,8 +99,8 @@ Page({
           Authorization: wx.getStorageSync("token")
         },
         success(res) {
-          const value = res.data;
-          if (value.code === 200) {
+          const info = res.data;
+          if (info.code === 200) {
             wx.showToast({
               title: "绑定成功",
               duration: 2000,
@@ -99,7 +108,7 @@ Page({
             });
             const userInfoStorage = wx.getStorageSync('userInfo');
             const userInfoApp = app.globalData.userInfo;
-            const bindRes = value.data;
+            const bindRes = info.data;
             const userInfobindRes = {
               userId: bindRes.idUser,
               phone: bindRes.phoneNum,
@@ -122,18 +131,28 @@ Page({
                 url: '../index/index',
               });
             }, 2000);
+          } else if (info.code === 401) {
+            wx.showToast({
+              title: '登录已过期或未登录',
+              duration: 2000,
+              icon: "none"
+            });
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
           } else {
             wx.showToast({
-              title: value.message,
+              title: innfo.message,
               duration: 2000,
               icon: "none"
             });
           }
         },
-        fail() {
+        fail(res) {
           wx.showToast({
-            title: "手机号绑定失败！",
-            icon: "none"
+            title: "手机号绑定失败！" + res.error,
+            icon: "none",
+            duration: 2000
           })
         }
       })

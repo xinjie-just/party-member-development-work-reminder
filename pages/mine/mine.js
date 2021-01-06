@@ -42,6 +42,15 @@ Page({
           wx.redirectTo({
             url: '../wechat-login/wechat-login',
           });
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../wechat-login/wechat-login',
+          })
         } else {
           wx.showToast({
             title: '退出失败！' + info.message,

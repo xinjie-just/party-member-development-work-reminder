@@ -15,6 +15,13 @@ Page({
   },
   
   onLoad: function () {
+    const openid = wx.getStorageSync('openid');
+    if (openid) {
+      this.createLoginFreeSession(openid);
+      wx.redirectTo({
+        url: '../index/index',
+      })
+    }
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -45,6 +52,48 @@ Page({
       })
     }
   },
+
+  // 通过微信openid创建免登录会话
+  createLoginFreeSession(openId) {
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/createLoginFreeSession`,
+      data: {
+        openId
+      },
+      header: {
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
+      },
+      success(value) {
+        const info = value.data;
+        if (info.code === 200) {
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: './wechat-login',
+          })
+        } else {
+          wx.showToast({
+            title: info.message,
+            icon: "none",
+            duration: 2000
+          });
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: res.error,
+          icon: "none",
+          duration: 2000
+        });
+      }
+    })
+  },
+
   // 存储用户信息并跳转
   storageUserInfo() {
     wx.setStorageSync('userInfo', {
@@ -149,6 +198,15 @@ Page({
               });
             }, 500);
           }
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../wechat-login/wechat-login',
+          })
         }
       },
       fail(res) {
