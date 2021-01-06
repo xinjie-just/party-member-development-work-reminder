@@ -15,6 +15,17 @@ Page({
 
   },
 
+  subscribe() {
+    // TODO: 先给个提示，后面补气逻辑
+    setTimeout(() => {
+      wx.showToast({
+        title: '订阅成功',
+        icon: 'none',
+        duration: 2000
+      })
+    }, 1000)
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
