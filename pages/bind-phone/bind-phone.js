@@ -26,14 +26,17 @@ Page({
     this.setData({
       username
     });
+    this.setData({
+      usernameValid: !!this.data.username,
+    });
   },
 
   onInput(evt) {
     const {value} = evt.detail;
-    const {id} = evt.currentTarget;
+    const {name} = evt.currentTarget.dataset;
     const PHONE_REG_EXP = /^1\d{10}$/;
     let result = false;
-    if (id === 'phone') {
+    if (name === 'phone') {
       result = PHONE_REG_EXP.test(value);
       if (result) {
         this.setData({
@@ -45,16 +48,8 @@ Page({
           phoneValid: false
         });
       }
-    }
-    if (this.data.username) {
-      this.setData({
-        usernameValid: true,
-      });
-      this.setData({
-        username: value,
-      });
     } else {
-      if (id === 'username') {
+      if (name === 'username') {
         this.setData({
           usernameValid: !!value,
         });

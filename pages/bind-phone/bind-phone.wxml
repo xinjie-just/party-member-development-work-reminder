@@ -5,11 +5,11 @@
     <view class="form-control">
       <view class="form-control-item">
         <label for="username" class="form-control-label">姓名</label>
-        <input type="text" id="username" class="form-control-input" placeholder="请输入姓名(昵称)" value="{{username}}" bindinput="onInput"/>
+        <input type="text" id="username" data-name="username" class="form-control-input" placeholder="请输入姓名(昵称)" value="{{username}}" bindinput="onInput"/>
       </view>
       <view class="form-control-item">
         <label for="phone" class="form-control-label">手机号</label>
-        <input type="text" id="phone" class="form-control-input" placeholder="请输入手机号" value="{{phone}}" bindinput="onInput"/>
+        <input type="text" id="phone" data-name="phone" class="form-control-input" placeholder="请输入手机号" value="{{phone}}" bindinput="onInput"/>
       </view>
     </view>
     <view class="submit-btn {{valid ? '' : 'disabled'}}" catchtap="bindPhone">确定</view>
