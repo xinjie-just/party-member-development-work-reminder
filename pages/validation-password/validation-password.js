@@ -75,7 +75,7 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          const realName = info.data.realName;
+          const realName = info.data.user.realName;
           that.bindPhone(realName);
         } else if (info.code === 401) {
           wx.showToast({
@@ -109,69 +109,57 @@ Page({
 
   // 绑定手机号
   bindPhone(realName) {
-    if (!this.data.phoneValid) {
-      wx.showToast({
-        title: '手机号格式不对',
-        icon: "none"
-      });
-    } else if (!this.data.usernameValid) {
-      wx.showToast({
-        title: '姓名不能为空',
-        icon: "none"
-      });
-    } else {
-      const openid = wx.getStorageSync('openid');
-      wx.request({
-        url: `${app.globalData.hostname}/user/weiXinLoginBindPhone`,
-        method: "POST",
-        data: {
-          openid,
-          phone: this.data.phone,
-          realName
-        },
-        header: {
-          accessSide: "weixin",
-          Authorization: wx.getStorageSync("token")
-        },
-        success(res) {
-          const info = res.data;
-          if (info.code === 200) {
-            wx.showToast({
-              title: "手机号绑定成功！",
-              duration: 2000,
-              icon: "success"
-            });
-            setTimeout(() => {
-              wx.switchTab({
-                url: '../index/index',
-              });
-            }, 2000);
-          } else if (info.code === 401) {
-            wx.showToast({
-              title: '登录已过期或未登录',
-              duration: 2000,
-              icon: "none"
-            });
-            wx.redirectTo({
-              url: '../wechat-login/wechat-login',
-            })
-          } else {
-            wx.showToast({
-              title: info.message || '手机号绑定失败！',
-              duration: 2000,
-              icon: "none"
-            });
-          }
-        },
-        fail(res) {
+    const openid = wx.getStorageSync('openid');
+    wx.request({
+      url: `${app.globalData.hostname}/user/weiXinLoginBindPhone`,
+      method: "POST",
+      data: {
+        openid,
+        phone: this.data.phone,
+        realName
+      },
+      header: {
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
+      },
+      success(res) {
+        const info = res.data;
+        if (info.code === 200) {
           wx.showToast({
-            title: "手机号绑定失败！" + res.error,
-            icon: "none",
-            duration: 2000
+            title: "手机号绑定成功！",
+            duration: 2000,
+            icon: "success"
+          });
+          setTimeout(() => {
+            wx.switchTab({
+              url: '../index/index',
+            });
+          }, 2000);
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../wechat-login/wechat-login',
           })
+        } else {
+          wx.showToast({
+            title: info.message || '手机号绑定失败！',
+            duration: 2000,
+            icon: "none"
+          });
         }
-      })
-    }
+      },
+      fail(res) {
+        wx.showToast({
+          title: "手机号绑定失败！" + res.error,
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**

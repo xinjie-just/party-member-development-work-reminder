@@ -103,7 +103,7 @@ Page({
           if (info.data) {
             // 去验证手机号密码，验证成功就调接口去绑定，不跳绑定手机号页面，跳首页
             wx.redirectTo({
-              url: `../validation-password/validation-password?phoneNum=${this.data.phone}`,
+              url: `../validation-password/validation-password?phoneNum=${that.data.phone}`,
             });
           } else {
             that.toBind();
