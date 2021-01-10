@@ -31,7 +31,7 @@ Page({
       });
       if (this.data.valid) {
         this.setData({
-          phone: value,
+          password: value,
         });
       }
     }
@@ -46,7 +46,7 @@ Page({
       });
       return;
     }
-    if (this.data.phone) {
+    if (!this.data.phone) {
       wx.showToast({
         title: '手机号码必填！',
         duration: 2000,

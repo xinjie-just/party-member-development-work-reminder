@@ -80,7 +80,57 @@ Page({
         icon: "none"
       });
     } else {
-      const openid = wx.getStorageSync('openid');
+      // 先通过手机号查询用户信息
+      this.queryUserByPhoneNum();
+    }
+  },
+
+  // 通过手机号查询用户信息
+  queryUserByPhoneNum() {
+    let that = this;
+    wx.request({
+      url: `${app.globalData.hostname}/user/queryUserByPhoneNum`,
+      data: {
+        phoneNum: this.data.phone
+      },
+      header: {
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
+      },
+      success(value) {
+        const info = value.data;
+        if (info.code === 200) {
+          if (info.data) {
+            // 去验证手机号密码，验证成功就调接口去绑定，不跳绑定手机号页面，跳首页
+            wx.redirectTo({
+              url: `../validation-password/validation-password?phoneNum=${this.data.phone}`,
+            });
+          } else {
+            that.toBind();
+          }
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: './wechat-login',
+          })
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: res.error,
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
+  },
+
+  toBind() {
+    const openid = wx.getStorageSync('openid');
       wx.request({
         url: `${app.globalData.hostname}/user/weiXinLoginBindPhone`,
         method: "POST",
@@ -151,7 +201,6 @@ Page({
           })
         }
       })
-    }
   },
 
   /**

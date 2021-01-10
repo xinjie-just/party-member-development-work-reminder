@@ -100,9 +100,11 @@ Page({
             icon: "none",
             duration: 2000
           });
+          wx.clearStorageSync();
+          app.globalData.userInfo = null;
           setTimeout(() => {
-            wx.switchTab({
-              url: '../mine',
+            wx.redirectTo({
+              url: '../../wechat-login/wechat-login',
             });
           }, 2000);
         } else if (info.code === 401) {

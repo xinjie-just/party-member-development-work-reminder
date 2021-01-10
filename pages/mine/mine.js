@@ -33,7 +33,8 @@ Page({
       success(value) {
         const info = value.data;
         if (info.code === 200) {
-          wx.clearStorageSync()
+          wx.clearStorageSync();
+          app.globalData.userInfo = null;
           wx.showToast({
             title: '账户退出成功！',
             icon: "none",
