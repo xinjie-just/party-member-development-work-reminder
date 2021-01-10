@@ -118,6 +118,11 @@
           "pathName": "pages/password-login/password-login",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/validation-password/validation-password",
+          "pathName": "pages/validation-password/validation-password",
+          "scene": null
         }
       ]
     }

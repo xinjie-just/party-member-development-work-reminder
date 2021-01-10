@@ -8,7 +8,8 @@
     "pages/mine/mine",
     "pages/mine/subscribe-remind/subscribe-remind",
     "pages/mine/change-password/change-password",
-    "pages/index/process/process"
+    "pages/index/process/process",
+    "pages/validation-password/validation-password"
   ],
   "window": {
     "backgroundTextStyle": "light",
