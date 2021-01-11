@@ -18,6 +18,7 @@
 - 小程序简称：工作提醒
 - 项目名称：党员发展工作提醒
 - AppID：wxacacf4b5335bdfd1
+- AppSecret: 20106ba2ac9a492da9e08e6b75d0df1f
 
 二、小程序官方文档
 

@@ -60,11 +60,6 @@ Page({
               url: '../index/index',
             })
           } else {
-            setTimeout(() => {
-              wx.redirectTo({
-                url: '../bind-phone/bind-phone',
-              });
-            }, 500);
           }
         } else if (info.code === 401) {
           wx.showToast({
@@ -207,9 +202,12 @@ Page({
               duration: 2000,
               icon: "success"
             });
+            if (info.data.token) {
+              wx.setStorageSync('token', info.data.token);
+            }
             const userInfoStorage = wx.getStorageSync('userInfo');
             const userInfoApp = app.globalData.userInfo;
-            const bindRes = info.data;
+            const bindRes = info.data.user;
             const userInfobindRes = {
               userId: bindRes.idUser,
               phone: bindRes.phoneNum,

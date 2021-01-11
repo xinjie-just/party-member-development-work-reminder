@@ -90,7 +90,9 @@ Page({
               if (info.code === 200) {
                 wx.setStorageSync("openid", info.data.openid);
                 wx.setStorageSync("sessionKey", info.data.sessionKey);
-                wx.setStorageSync('token', info.data.token);
+                if (info.data.token) {
+                  wx.setStorageSync('token', info.data.token);
+                }
                 wx.showToast({
                   title: '身份信息获取成功',
                   icon: "none",

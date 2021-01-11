@@ -9,35 +9,22 @@ Page({
     userName: '',
     total: 0
   },
-  selectTodoItem(e) {
-    console.log("evt111", e);
-    this.setData({
-      selectedId: e.currentTarget.dataset.id
-    });
-  },
-  handleItem() {
-    if(!this.data.selectedId) return;
-    console.log("selectedId",this.data.selectedId);
-    const selectedId = this.data.selectedId;
-    let realName = '';
-    let nodeName = '';
-    this.data.todoList.forEach(item => {
-      if(item.id === selectedId) {
-        realName = item.realName;
-        nodeName = item.nodeName;
-      }
-    })
-    wx.redirectTo({
-      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}`,
-    })
-  },
+  
   onLoad: function () {
     const storageUserInfo = wx.getStorageSync('userInfo');
+    const storageUserOtherInfo = wx.getStorageSync('userOtherInfo');
+    let userName = '';
+    if (storageUserInfo) {
+      userName = storageUserInfo.realName || storageUserInfo.nickName
+    } else if (storageUserOtherInfo) {
+      userName = storageUserOtherInfo.realName || storageUserOtherInfo.nickName
+    }
     this.setData({
-      userName: storageUserInfo.realName || storageUserInfo.nickName
+      userName
     });
     this.getTodoList();
   },
+
   getTodoList() {
     let that = this;
     wx.request({
@@ -87,5 +74,30 @@ Page({
         })
       }
     })
-  }
+  },
+
+  selectTodoItem(e) {
+    console.log("evt111", e);
+    this.setData({
+      selectedId: e.currentTarget.dataset.id
+    });
+  },
+  handleItem() {
+    if(!this.data.selectedId) return;
+    console.log("selectedId",this.data.selectedId);
+    const selectedId = this.data.selectedId;
+    let realName = '';
+    let nodeName = '';
+    if (this.data.todoList) {
+      this.data.todoList.forEach(item => {
+        if(item.id === selectedId) {
+          realName = item.realName;
+          nodeName = item.nodeName;
+        }
+      })
+    }
+    wx.redirectTo({
+      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}`,
+    })
+  },
 })
