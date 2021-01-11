@@ -22,6 +22,8 @@ Page({
       username = app.globalData.userInfo.nickName;
     } else if (wx.getStorageSync('userInfo')) {
       username = wx.getStorageSync('userInfo').nickName;
+    } else {
+      username = wx.getStorageSync('userOtherInfo').nickName;
     }
     this.setData({
       username
@@ -29,6 +31,60 @@ Page({
     this.setData({
       usernameValid: !!this.data.username,
     });
+    const openid = wx.getStorageSync('openid');
+    if (openid) {
+      this.queryUser(openid);
+    }
+  },
+
+  // 通过微信openid查询用户信息，如果查询到有用户，就证明绑定过手机号了
+  // /miniProgram/queryUserByOpenId
+  queryUser(openId) {
+    let that = this;
+    wx.request({
+      url: `${app.globalData.hostname}/miniProgram/queryUserByOpenId`,
+      data: {
+        openId
+      },
+      header: {
+        accessSide: "weixin",
+        Authorization: wx.getStorageSync("token")
+      },
+      success(value) {
+        const info = value.data;
+        if (info.code === 200) {
+          if (info.data) {
+            // 绑定过手机号了
+            wx.setStorageSync("userOtherInfo", info.data);
+            wx.switchTab({
+              url: '../index/index',
+            })
+          } else {
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../bind-phone/bind-phone',
+              });
+            }, 500);
+          }
+        } else if (info.code === 401) {
+          wx.showToast({
+            title: '登录已过期或未登录',
+            duration: 2000,
+            icon: "none"
+          });
+          wx.redirectTo({
+            url: '../wechat-login/wechat-login',
+          })
+        }
+      },
+      fail(res) {
+        wx.showToast({
+          title: res.error,
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
   },
 
   onInput(evt) {

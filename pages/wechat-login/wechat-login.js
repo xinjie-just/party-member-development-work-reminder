@@ -98,6 +98,7 @@ Page({
                 });
                 if (info.data.user) {
                   // 绑定过了
+                  wx.setStorageSync("userOtherInfo", info.data.user);
                   setTimeout(() => {
                     wx.switchTab({
                       url: '../index/index',
