@@ -12,6 +12,8 @@
           <text>退出</text>
         </view>
     </view>
+    <mp-dialog title="确定要退出吗" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{[{text: '取消'}, {text: '确认'}]}}">
+    </mp-dialog>
     <view class="todo-list">
         <view class="todo-item subscribe-remind" catchtap="subscribeRemind">
           <text class="text">订阅提醒</text>
