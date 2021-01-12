@@ -1,7 +1,204 @@
 page {
-  background-color: #f8f8f8;
+  background-color: #fff;
 }
-.header {
+
+.personal .header {
+  width: 750rpx;
+  height: 150rpx;
+  margin-bottom: 140rpx;
+  background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
+  border-bottom-right-radius: 60rpx 20rpx;
+  border-bottom-left-radius: 60rpx 20rpx;
+  color: #fff;
+  padding: 30rpx 28rpx 120rpx;
+  box-sizing: border-box;
+}
+.personal .header .banner {
+  display: block;
+  width: 694rpx;
+  height: 220rpx;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* 流程 */
+.personal .process-list {
+  position: relative;
+  z-index: 200;
+  display: flex;
+  margin-bottom: 40rpx;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.personal .process-list::before {
+  content: "";
+  z-index: 201;
+  position: absolute;
+  top: 29rpx;
+  right: calc(100% / 5 / 2);
+  left: calc(100% / 5 / 2);
+  height: 2rpx;
+  background-color: #ddd;
+}
+
+.personal .process-item {
+  z-index: 202;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 36rpx;
+  color: #333;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+.personal .process-list.process-list-3::before {
+  right: calc(100% / 3 / 2);
+  left: calc(100% / 3 / 2);
+}
+.personal .process-list.process-list-4::before {
+  right: calc(100% / 4 / 2);
+  left: calc(100% / 4 / 2);
+}
+.personal .process-list.process-list-5::before {
+  right: calc(100% / 5 / 2);
+  left: calc(100% / 5 / 2);
+}
+.personal .process-list.process-list-6::before {
+  right: calc(100% / 6 / 2);
+  left: calc(100% / 6 / 2);
+}
+.personal .process-list.process-list-6::before {
+  right: calc(100% / 7 / 2);
+  left: calc(100% / 7 / 2);
+}
+
+
+/*wxss不支持兄弟元素选择器*/
+.personal .process-item {
+  width: 20%;
+}
+.personal .process-item-3 {
+  width: calc(100% / 3);
+}
+.personal .process-item-4 {
+  width: 25%;
+}
+.personal .process-item-5 {
+  width: 20%;
+}
+.personal .process-item-6 {
+  width: calc(100% / 6);
+}
+.personal .process-item-7 {
+  width: calc(100% / 7);
+}
+
+.personal .process-item .process-index {
+  display: block;
+  background-color: #fff;
+  border: 2rpx solid #999;
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: auto;
+  margin-left: auto;
+  line-height: calc(60rpx - 4rpx);
+  text-align: center;
+  font-size: 34rpx;
+  color: #999;
+  box-sizing: border-box;
+}
+
+.personal .process-item.active .process-index {
+  border-color: #e41e35;
+  color: #fff;
+  background-color: #e41e35;
+  box-shadow: 0 4rpx 10rpx 0 rgba(228, 30, 53, 0.5);
+}
+.personal .process-item.completed .process-index {
+  border-color: #666;
+  color: #fff;
+  background-color: #666;
+}
+
+.personal .process-item .process-text {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 36rpx;
+  margin-top: 16rpx;
+  text-align: center;
+}
+
+.personal .process-item.active .process-text {
+  color: #e41e35;
+}
+
+/* 步骤 */
+.personal .step-container {
+  padding-right: 28rpx;
+  padding-left: 28rpx;
+  overflow-y: auto;
+  background-image: linear-gradient(to bottom, white 15px, hsla(0, 0%, 100%, 0)),
+  radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+  linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
+  radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
+  background-repeat: no-repeat;
+  background-position: top center, top center, bottom center, bottom center;
+  background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
+  background-attachment: local, scroll, local, scroll;
+}
+
+.personal .step-item {
+  background-color: #fff;
+  box-shadow: 0 4rpx 24rpx 0 rgba(52, 80, 106, 0.1);
+  border-radius: 14rpx;
+  padding: 36rpx 0 36rpx 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.personal .step-item:not(:last-of-type) {
+  margin-bottom: 20rpx;
+}
+.personal .step-item .step-text {
+  flex: 1;
+}
+.personal .step-item .which-step {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+.personal .step-item .which-step .num {
+  margin-right: 10rpx;
+  margin-left: 10rpx;
+}
+.personal .step-item .things {
+  display: block;
+  font-size: 30rpx;
+  line-height: 46rpx;
+  color: #333;
+  word-break: break-all;
+}
+.personal .step-item .step-status {
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  padding: 20rpx 35rpx;
+  border-radius: 70rpx 0 0 70rpx;
+  background-color: #e41e35;
+  color: #fff;
+}
+.personal .step-item.active .step-status {
+  background-color: #25b5bc;
+}
+.personal .step-item.completed .step-status {
+  background-color: #37464d;
+}
+
+
+.other-role .header {
   width: 750rpx;
   height: 464rpx;
   background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
@@ -11,17 +208,17 @@ page {
   padding: 54rpx 58rpx 220rpx;
   box-sizing: border-box;
 }
-.header .welcome {
+.other-role .header .welcome {
   display: block;
   font-size: 40rpx;
   line-height: 40rpx;
   margin-bottom: 30rpx;
 }
-.header .tips {
+.other-role .header .tips {
   font-size: 46rpx;
   line-height: 46rpx;
 }
-.todo-container {
+.other-role .todo-container {
   width: 694rpx;
   background: #FFFFFF;
   box-shadow: 0px 2rpx 30rpx 0px rgba(33, 60, 102, 0.1);
@@ -30,7 +227,7 @@ page {
   box-sizing: border-box;
   padding: 20rpx 30rpx 60rpx;
 }
-.todo-container .todo-list {
+.other-role .todo-container .todo-list {
   font-size: 32rpx;
   max-height: calc((60rpx + 26rpx + 26rpx) * 7);
   overflow-y: auto;
@@ -43,7 +240,7 @@ page {
   background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
   background-attachment: local, scroll, local, scroll;
 }
-.todo-container .todo-item {
+.other-role .todo-container .todo-item {
   display: block;
   line-height: 56rpx;
   padding-top: 28rpx;
@@ -51,14 +248,14 @@ page {
   color: #333333;
   word-break: break-all;
 }
-.todo-container .todo-item:not(:last-of-type) {
+.other-role .todo-container .todo-item:not(:last-of-type) {
   border-bottom: 1rpx solid #e5e5e5;
 }
-.todo-container .todo-item-active {
+.other-role .todo-container .todo-item-active {
   font-weight: 500;
   color: #C8273A;
 }
-.todo-container .submit-btn {
+.other-role .todo-container .submit-btn {
   margin: 20rpx auto 0;
   width: 500rpx;
   height: 98rpx;
@@ -72,11 +269,11 @@ page {
   padding: 0;
   box-sizing: border-box;
 }
-.todo-container .submit-btn-active {
+.other-role .todo-container .submit-btn-active {
   background: #E41E35;
   color: #ffffff;
 }
-.todo-container .no-data-img {
+.other-role .todo-container .no-data-img {
   display: block;
   width: 240rpx;
   height: 240rpx;

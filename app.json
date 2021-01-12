@@ -1,14 +1,13 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/index/detail/detail",
     "pages/wechat-login/wechat-login",
     "pages/password-login/password-login",
     "pages/bind-phone/bind-phone",
-    "pages/index/index",
-    "pages/index/detail/detail",
     "pages/mine/mine",
     "pages/mine/subscribe-remind/subscribe-remind",
     "pages/mine/change-password/change-password",
-    "pages/index/process/process",
     "pages/validation-password/validation-password"
   ],
   "entryPagePath": "pages/index/index",
