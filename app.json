@@ -11,6 +11,7 @@
     "pages/index/process/process",
     "pages/validation-password/validation-password"
   ],
+  "entryPagePath": "pages/index/index",
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#A5131C",

@@ -66,9 +66,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           that.setData({
             stages: [],
@@ -125,9 +127,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           that.setData({
             allNodeStateInfo: [],

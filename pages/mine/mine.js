@@ -13,13 +13,13 @@ Page({
   },
 
   subscribeRemind() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: './subscribe-remind/subscribe-remind',
     });
   },
 
   changePassword() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: './change-password/change-password',
     });
   },
@@ -61,9 +61,11 @@ Page({
               duration: 2000,
               icon: "none"
             });
-            wx.redirectTo({
-              url: '../wechat-login/wechat-login',
-            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../wechat-login/wechat-login',
+              })
+            }, 2000);
           } else {
             wx.showToast({
               title: '退出失败！' + info.message,

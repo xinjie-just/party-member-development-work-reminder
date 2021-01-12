@@ -27,7 +27,7 @@ Page({
             icon: "none",
             duration: 2000
           });
-          wx.redirectTo({
+          wx.switchTab({
             url: '../mine',
           });
         }
@@ -38,7 +38,7 @@ Page({
           icon: "none",
           duration: 2000
         });
-        wx.redirectTo({
+        wx.switchTab({
           url: '../mine',
         });
       }

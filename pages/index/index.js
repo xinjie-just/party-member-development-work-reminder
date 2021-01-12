@@ -51,9 +51,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           that.setData({
             todoList: [],
@@ -96,7 +98,7 @@ Page({
         }
       })
     }
-    wx.redirectTo({
+    wx.navigateTo({
       url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}`,
     })
   },

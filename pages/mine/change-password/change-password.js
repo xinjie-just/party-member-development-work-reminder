@@ -113,9 +113,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           wx.showToast({
             title: '密码修改失败！' + info.message,

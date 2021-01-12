@@ -31,10 +31,10 @@ Page({
     this.setData({
       usernameValid: !!this.data.username,
     });
-    const openid = wx.getStorageSync('openid');
-    if (openid) {
-      this.queryUser(openid);
-    }
+    // const openid = wx.getStorageSync('openid');
+    // if (openid) {
+    //   this.queryUser(openid);
+    // }
   },
 
   // 通过微信openid查询用户信息，如果查询到有用户，就证明绑定过手机号了
@@ -67,9 +67,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
+          }, 2000);
         }
       },
       fail(res) {
@@ -153,7 +155,7 @@ Page({
         if (info.code === 200) {
           if (info.data) {
             // 去验证手机号密码，验证成功就调接口去绑定，不跳绑定手机号页面，跳首页
-            wx.redirectTo({
+            wx.navigateTo({
               url: `../validation-password/validation-password?phoneNum=${that.data.phone}`,
             });
           } else {
@@ -165,9 +167,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: './wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
+          }, 2000);
         }
       },
       fail(res) {
@@ -236,9 +240,11 @@ Page({
               duration: 2000,
               icon: "none"
             });
-            wx.redirectTo({
-              url: '../wechat-login/wechat-login',
-            })
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '../wechat-login/wechat-login',
+              })
+            }, 2000);            
           } else {
             wx.showToast({
               title: info.message || "手机号绑定失败！",

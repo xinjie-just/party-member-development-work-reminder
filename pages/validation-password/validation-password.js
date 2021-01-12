@@ -83,9 +83,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../wechat-login/wechat-login',
-          });
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           wx.showToast({
             title: info.message || '密码验证失败，请联系管理员！',
@@ -141,9 +143,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           wx.showToast({
             title: info.message || '手机号绑定失败！',

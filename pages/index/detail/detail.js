@@ -52,9 +52,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           wx.showToast({
             title: info.message || '更新任务阅读时间失败！',
@@ -99,9 +101,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../../wechat-login/wechat-login',
+            })
+          }, 2000);
         } else {
           wx.showToast({
             title: info.message || '代办事项办理失败！',

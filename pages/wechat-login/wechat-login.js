@@ -55,11 +55,9 @@ Page({
     wx.setStorageSync('userInfo', {
       ...app.globalData.userInfo
     });
-    setTimeout(() => {
-      wx.redirectTo({
-        url: '../bind-phone/bind-phone',
-      });
-    }, 2000);
+    // wx.redirectTo({
+    //   url: '../bind-phone/bind-phone',
+    // });
   },
   getUserInfo: function(e) {
     wx.clearStorageSync();
@@ -140,7 +138,6 @@ Page({
   },
 
   // 通过微信openid查询用户信息，如果查询到有用户，就证明绑定过手机号了
-  // /miniProgram/queryUserByOpenId
   queryUser(openId) {
     let that = this;
     wx.request({
@@ -162,11 +159,9 @@ Page({
               url: '../index/index',
             })
           } else {
-            setTimeout(() => {
               wx.redirectTo({
                 url: '../bind-phone/bind-phone',
               });
-            }, 500);
           }
         } else if (info.code === 401) {
           wx.showToast({
@@ -174,9 +169,11 @@ Page({
             duration: 2000,
             icon: "none"
           });
-          wx.redirectTo({
-            url: '../wechat-login/wechat-login',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: './wechat-login',
+            })
+          }, 2000);
         }
       },
       fail(res) {
@@ -191,7 +188,7 @@ Page({
 
   // 手机号密码登录
   phonePasswordLogin() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../password-login/password-login',
     });
   }
