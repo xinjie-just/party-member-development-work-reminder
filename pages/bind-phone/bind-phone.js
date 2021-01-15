@@ -154,6 +154,14 @@ Page({
         const info = value.data;
         if (info.code === 200) {
           if (info.data) {
+            if (info.data.phoneNum) {
+              wx.setStorageSync('userOtherInfo', info.data);
+            }
+            if (info.data.openId) {
+              wx.setStorageSync('openid', info.data.openId);
+            } else if (info.data.openid){
+              wx.setStorageSync('openid', info.data.openid);
+            }
             // 去验证手机号密码，验证成功就调接口去绑定，不跳绑定手机号页面，跳首页
             wx.navigateTo({
               url: `../validation-password/validation-password?phoneNum=${that.data.phone}`,
@@ -213,13 +221,13 @@ Page({
             const userInfoApp = app.globalData.userInfo;
             const bindRes = info.data.user;
             const userInfobindRes = {
-              userId: bindRes.idUser,
-              phone: bindRes.phoneNum,
+              idUser: bindRes.idUser,
+              phoneNum: bindRes.phoneNum,
               realName: bindRes.realName,
               startTime: bindRes.startTime,
               lastLoginTime: bindRes.lastLoginTime,
               dataState: bindRes.dataState, // 0 锁定, 1 正常状态, 2 已经假删除
-              roleId: bindRes.idRole
+              idRole: bindRes.idRole
             };
             wx.setStorageSync("userInfo", {
               ...userInfoStorage,

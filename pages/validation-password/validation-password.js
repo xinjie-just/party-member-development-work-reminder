@@ -154,6 +154,13 @@ Page({
             duration: 2000,
             icon: "none"
           });
+          wx.clearStorageSync();
+          app.globalData.userInfo = null;
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '../wechat-login/wechat-login',
+            })
+          }, 2000);
         }
       },
       fail(res) {

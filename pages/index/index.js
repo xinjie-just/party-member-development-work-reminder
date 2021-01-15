@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
@@ -8,7 +8,7 @@ Page({
     isPersonal: true,
     roleName: '',
     userName: '',
-    roleId: null,
+    idRole: null,
     roles: [],
     roleTotal: 0,
     stages: [],
@@ -16,45 +16,40 @@ Page({
     idUser: null,
     phoneNum: null,
     allNodeStateInfo: [],
-    currentStageInfo: []
+    currentStageInfo: [],
   },
-  
+
   onLoad: function () {
     this.setData({
-      loading: true
+      loading: true,
     });
-    const storageUserInfo = wx.getStorageSync('userInfo');
     const storageUserOtherInfo = wx.getStorageSync('userOtherInfo');
-    console.log("通过openid获取到的用户信息", storageUserOtherInfo);
+    console.log('通过openid获取到的用户信息', storageUserOtherInfo);
 
-    let roleId = null;
+    let idRole = null;
     let userName = '';
     let idUser = null;
     let phoneNum = '';
-    if (storageUserInfo) {
-      roleId = storageUserInfo.roleId;
-      userName = storageUserInfo.realName || storageUserInfo.nickName;
-      idUser = storageUserInfo.idUser;
-      phoneNum = storageUserInfo.phoneNum;
-    } else if (storageUserOtherInfo) {
-      roleId = storageUserOtherInfo.roleId;
+    if (storageUserOtherInfo) {
+      idRole = storageUserOtherInfo.idRole;
       userName = storageUserOtherInfo.realName || storageUserOtherInfo.nickName;
       idUser = storageUserOtherInfo.idUser;
       phoneNum = storageUserOtherInfo.phoneNum;
     }
     this.setData({
-      roleId,
+      idRole,
       userName,
       idUser,
-      phoneNum
+      phoneNum,
     });
 
-    const openid = wx.getStorageSync('openid');
-    if (openid) {
-      if (!this.data.roleId) { // 没有角色的不算个人
+    const token = wx.getStorageSync('token');
+    if (token) {
+      if (!this.data.idRole) {
+        // 没有角色的不算个人
         this.setData({
           isPersonal: false,
-          loading: false
+          loading: false,
         });
         this.getTodoList();
       } else {
@@ -64,14 +59,21 @@ Page({
       wx.showToast({
         title: '登录已过期或未登录',
         duration: 2000,
-        icon: "none"
+        icon: 'none',
       });
       setTimeout(() => {
         wx.redirectTo({
           url: '../wechat-login/wechat-login',
-        })
+        });
       }, 2000);
     }
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.getTodoList();
   },
 
   getAllRole() {
@@ -80,32 +82,33 @@ Page({
       url: `${app.globalData.hostname}/role/getPage`,
       data: {
         pageNo: 1,
-        pageSize: 99
+        pageSize: 99,
       },
       header: {
-        accessSide: "weixin",
-        Authorization: wx.getStorageSync("token")
+        accessSide: 'weixin',
+        Authorization: wx.getStorageSync('token'),
       },
       success(res) {
         const info = res.data;
         if (info.code === 200) {
           that.setData({
             roles: info.data.page.records,
-            roleTotal: info.data.page.total
+            roleTotal: info.data.page.total,
           });
-          that.data.roles.map(item => {
-            if (item.idRole === that.data.roleId) {
+          that.data.roles.map((item) => {
+            if (item.idRole === that.data.idRole) {
               if (item.roleName === '个人') {
                 that.setData({
-                  isPersonal: true
+                  isPersonal: true,
                 });
                 that.queryAllStage();
                 that.queryPersonAllNodeState();
                 return;
               } else {
                 that.setData({
-                  isPersonal: false
+                  isPersonal: false,
                 });
+                that.getTodoList();
               }
             }
           });
@@ -113,38 +116,38 @@ Page({
           wx.showToast({
             title: '登录已过期或未登录',
             duration: 2000,
-            icon: "none"
+            icon: 'none',
           });
           setTimeout(() => {
             wx.redirectTo({
               url: '../wechat-login/wechat-login',
-            })
+            });
           }, 2000);
         } else {
           that.setData({
             roles: [],
-            roleTotal: 0
+            roleTotal: 0,
           });
           wx.showToast({
             title: info.message || '角色信息列表失败',
-            icon: "none",
-            duration: 3000
+            icon: 'none',
+            duration: 3000,
           });
         }
       },
       fail(res) {
         wx.showToast({
-          title: '待办事项获取失败！'+ res.error,
-          icon: "none",
-          duration: 2000
-        })
+          title: '待办事项获取失败！' + res.error,
+          icon: 'none',
+          duration: 2000,
+        });
       },
       complete() {
         that.setData({
-          loading: false
-        })
-      }
-    })
+          loading: false,
+        });
+      },
+    });
   },
 
   getTodoList() {
@@ -153,75 +156,84 @@ Page({
       url: `${app.globalData.hostname}/miniProgram/queryUserToDoBusiness`,
       data: {
         pageNo: 1,
-        pageSize: 10
+        pageSize: 10,
       },
       header: {
-        accessSide: "weixin",
-        Authorization: wx.getStorageSync("token")
+        accessSide: 'weixin',
+        Authorization: wx.getStorageSync('token'),
       },
       success(res) {
         const info = res.data;
-        console.log("待办事项", info.data);
+        console.log('待办事项', info.data);
         if (info.code === 200) {
           that.setData({
             todoList: info.data.page.records,
-            total: info.data.page.total
+            total: info.data.page.total,
           });
         } else if (info.code === 401) {
           wx.showToast({
             title: '登录已过期或未登录',
             duration: 2000,
-            icon: "none"
+            icon: 'none',
           });
           setTimeout(() => {
             wx.redirectTo({
               url: '../wechat-login/wechat-login',
-            })
+            });
           }, 2000);
         } else {
           that.setData({
             todoList: [],
-            total: 0
+            total: 0,
           });
           wx.showToast({
             title: info.message || '待办事项获取失败',
-            icon: "none",
-            duration: 3000
+            icon: 'none',
+            duration: 3000,
           });
         }
       },
       fail(res) {
         wx.showToast({
-          title: '待办事项获取失败！'+ res.error,
-          icon: "none",
-          duration: 2000
-        })
-      }
-    })
+          title: '待办事项获取失败！' + res.error,
+          icon: 'none',
+          duration: 2000,
+        });
+      },
+    });
   },
   selectTodoItem(e) {
-    console.log("evt111", e);
+    console.log('evt111', e);
     this.setData({
-      selectedId: e.currentTarget.dataset.id
+      selectedId: e.currentTarget.dataset.id,
     });
   },
   handleItem() {
-    if(!this.data.selectedId) return;
-    console.log("selectedId",this.data.selectedId);
+    if (!this.data.selectedId) {
+      wx.showToast({
+        title: '请先选择一项事项',
+        duration: 2000,
+        icon: 'none',
+      });
+      return;
+    }
+    console.log('selectedId', this.data.selectedId);
     const selectedId = this.data.selectedId;
     let realName = '';
     let nodeName = '';
+    let reminder = '';
     if (this.data.todoList) {
-      this.data.todoList.forEach(item => {
-        if(item.id === selectedId) {
+      this.data.todoList.forEach((item) => {
+        if (item.id === selectedId) {
           realName = item.realName;
           nodeName = item.nodeName;
+          reminder = item.reminder;
         }
-      })
+      });
     }
     wx.navigateTo({
-      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}`,
-    })
+      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}`,
+    });
   },
 
   //查询所有阶段
@@ -230,27 +242,27 @@ Page({
     wx.request({
       url: `${app.globalData.hostname}/stageNode/queryAllStage`,
       header: {
-        accessSide: "weixin",
-        Authorization: wx.getStorageSync("token")
+        accessSide: 'weixin',
+        Authorization: wx.getStorageSync('token'),
       },
       success(res) {
         const info = res.data;
-        console.log("所有阶段", info.data);
+        console.log('所有阶段', info.data);
         if (info.code === 200) {
-          const stages = info.data.map(item => {
+          const stages = info.data.map((item) => {
             let formatStageName = '';
-            if (item.stageName.includes("：")) {
-              const index = item.stageName.indexOf("：");
+            if (item.stageName.includes('：')) {
+              const index = item.stageName.indexOf('：');
               formatStageName = item.stageName.substring(index + 1);
             }
             return {
               ...item,
-              formatStageName
-            }
-          })
+              formatStageName,
+            };
+          });
           that.setData({
             stages,
-            selectedIdStage: stages.length ? stages[0].idStage : null //默认第一个阶段被选择
+            selectedIdStage: stages.length ? stages[0].idStage : null, //默认第一个阶段被选择
           });
           if (that.data.selectedIdStage) {
             that.getStepStateInfo(); // 设置默认的阶段后，去获取下面的步骤和状态信息
@@ -259,12 +271,12 @@ Page({
           wx.showToast({
             title: '登录已过期或未登录',
             duration: 2000,
-            icon: "none"
+            icon: 'none',
           });
           setTimeout(() => {
             wx.redirectTo({
               url: '../../wechat-login/wechat-login',
-            })
+            });
           }, 2000);
         } else {
           that.setData({
@@ -272,27 +284,27 @@ Page({
           });
           wx.showToast({
             title: info.message || '查询所有阶段失败',
-            icon: "none",
-            duration: 3000
+            icon: 'none',
+            duration: 3000,
           });
         }
       },
       fail(res) {
         wx.showToast({
-          title: '查询所有阶段失败！'+ res.error,
-          icon: "none",
-          duration: 2000
-        })
-      }
-    })
+          title: '查询所有阶段失败！' + res.error,
+          icon: 'none',
+          duration: 2000,
+        });
+      },
+    });
   },
 
   // 选择某一个阶段
   selectProcessItem(e) {
-    console.log("选择的对象", e.currentTarget.dataset);
-    const selectedIdStage = e.currentTarget.dataset.id
+    console.log('选择的对象', e.currentTarget.dataset);
+    const selectedIdStage = e.currentTarget.dataset.id;
     this.setData({
-      selectedIdStage
+      selectedIdStage,
     });
     this.getStepStateInfo();
   },
@@ -303,15 +315,15 @@ Page({
     wx.request({
       url: `${app.globalData.hostname}/miniProgram/queryPersonAllNodeState`,
       data: {
-        idUser: this.data.idUser
+        idUser: this.data.idUser,
       },
       header: {
-        accessSide: "weixin",
-        Authorization: wx.getStorageSync("token")
+        accessSide: 'weixin',
+        Authorization: wx.getStorageSync('token'),
       },
       success(res) {
         const info = res.data;
-        console.log("所有节点状态", info.data);
+        console.log('所有节点状态', info.data);
         if (info.code === 200) {
           that.setData({
             allNodeStateInfo: info.data,
@@ -320,12 +332,12 @@ Page({
           wx.showToast({
             title: '登录已过期或未登录',
             duration: 2000,
-            icon: "none"
+            icon: 'none',
           });
           setTimeout(() => {
             wx.redirectTo({
               url: '../../wechat-login/wechat-login',
-            })
+            });
           }, 2000);
         } else {
           that.setData({
@@ -333,31 +345,31 @@ Page({
           });
           wx.showToast({
             title: info.message || '查询个人用户所有节点状态失败',
-            icon: "none",
-            duration: 3000
+            icon: 'none',
+            duration: 3000,
           });
         }
       },
       fail(res) {
         wx.showToast({
-          title: '查询个人用户所有节点状态失败！'+ res.error,
-          icon: "none",
-          duration: 2000
-        })
-      }
-    })
+          title: '查询个人用户所有节点状态失败！' + res.error,
+          icon: 'none',
+          duration: 2000,
+        });
+      },
+    });
   },
 
   // 个人用户所有节点状态去匹配当前的步骤
   getStepStateInfo() {
     let currentStageInfo = [];
-    this.data.allNodeStateInfo.map(item => {
+    this.data.allNodeStateInfo.map((item) => {
       if (this.data.selectedIdStage === item.idStage) {
         currentStageInfo.push(item);
       }
     });
     this.setData({
-      currentStageInfo
-    })
-  }
-})
+      currentStageInfo,
+    });
+  },
+});

@@ -1,6 +1,6 @@
 <!--pages/index/detail/detail.wxml-->
 <view class="page">
-  <text class="header">待办事项名称</text>
+  <text class="header">{{reminder}}</text>
   <view class="body">
     <view class="name">
       <text class="iconfont icon-user"></text>

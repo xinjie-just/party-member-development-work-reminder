@@ -55,9 +55,9 @@ Page({
     wx.setStorageSync('userInfo', {
       ...app.globalData.userInfo
     });
-    // wx.redirectTo({
-    //   url: '../bind-phone/bind-phone',
-    // });
+    wx.redirectTo({
+      url: '../bind-phone/bind-phone',
+    });
   },
   getUserInfo: function(e) {
     wx.clearStorageSync();
