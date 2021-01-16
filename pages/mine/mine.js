@@ -2,14 +2,13 @@
 const app = getApp();
 
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     userName: '',
     phone: '',
-    dialogShow: false
+    dialogShow: false,
   },
 
   subscribeRemind() {
@@ -26,21 +25,22 @@ Page({
 
   logout() {
     this.setData({
-      dialogShow: true
+      dialogShow: true,
     });
   },
 
-  tapDialogButton(e){
-    const {index, item} = e.detail;
+  tapDialogButton(e) {
+    const { index, item } = e.detail;
     this.setData({
-      dialogShow: false
+      dialogShow: false,
     });
-    if (index === 1 || item.text === '确认') { // 确认
+    if (index === 1 || item.text === '确认') {
+      // 确认
       wx.request({
         url: `${app.globalData.hostname}/user/logout`,
         header: {
-          accessSide: "weixin",
-          Authorization: wx.getStorageSync("token")
+          accessSide: 'weixin',
+          Authorization: wx.getStorageSync('token'),
         },
         success(value) {
           const info = value.data;
@@ -48,9 +48,9 @@ Page({
             wx.clearStorageSync();
             app.globalData.userInfo = null;
             wx.showToast({
-              title: '账户退出成功！',
-              icon: "none",
-              duration: 2000
+              title: '退出成功',
+              icon: 'success',
+              duration: 2000,
             });
             wx.redirectTo({
               url: '../wechat-login/wechat-login',
@@ -59,28 +59,28 @@ Page({
             wx.showToast({
               title: '登录已过期或未登录',
               duration: 2000,
-              icon: "none"
+              icon: 'none',
             });
             setTimeout(() => {
               wx.redirectTo({
                 url: '../wechat-login/wechat-login',
-              })
+              });
             }, 2000);
           } else {
             wx.showToast({
               title: '退出失败！' + info.message,
-              icon: "none",
-              duration: 2000
+              icon: 'none',
+              duration: 2000,
             });
           }
         },
         fail(res) {
           wx.showToast({
             title: res.error,
-            icon: "none",
-            duration: 2000
+            icon: 'none',
+            duration: 2000,
           });
-        }
+        },
       });
     }
   },
@@ -93,56 +93,42 @@ Page({
     const storageUserOtherInfo = wx.getStorageSync('userOtherInfo');
     this.setData({
       userName: storageUserInfo.realName || storageUserInfo.nickName,
-      phone: storageUserInfo.phoneNum || storageUserOtherInfo.phoneNum
-    })
+      phone: storageUserInfo.phoneNum || storageUserOtherInfo.phoneNum,
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
+  onUnload: function () {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+  onPullDownRefresh: function () {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
-})
+  onShareAppMessage: function () {},
+});

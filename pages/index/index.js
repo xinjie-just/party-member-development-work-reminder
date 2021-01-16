@@ -26,22 +26,20 @@ Page({
     const storageUserOtherInfo = wx.getStorageSync('userOtherInfo');
     console.log('用户信息', storageUserOtherInfo);
 
-    let idRole = null;
-    let userName = '';
-    let idUser = null;
-    let phoneNum = '';
     if (storageUserOtherInfo) {
-      idRole = storageUserOtherInfo.idRole;
-      userName = storageUserOtherInfo.realName || storageUserOtherInfo.nickName;
-      idUser = storageUserOtherInfo.idUser;
-      phoneNum = storageUserOtherInfo.phoneNum;
+      const idRole = storageUserOtherInfo.idRole;
+      const userName =
+        storageUserOtherInfo.realName || storageUserOtherInfo.nickName;
+      const idUser = storageUserOtherInfo.idUser;
+      const phoneNum = storageUserOtherInfo.phoneNum;
+
+      this.setData({
+        idRole,
+        userName,
+        idUser,
+        phoneNum,
+      });
     }
-    this.setData({
-      idRole,
-      userName,
-      idUser,
-      phoneNum,
-    });
 
     const token = wx.getStorageSync('token');
     if (token) {
@@ -73,7 +71,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getTodoList();
+    const token = wx.getStorageSync('token');
+    if (token) {
+      this.getTodoList();
+    }
   },
 
   // 获取所有角色

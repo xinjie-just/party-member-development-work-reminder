@@ -90,9 +90,9 @@ Page({
         const info = res.data;
         if (info.code === 200) {
           wx.showToast({
-            title: info.message || '代办事项办理成功！',
-            icon: 'none',
-            duration: 3000,
+            title: '办理成功',
+            icon: 'success',
+            duration: 2000,
           });
           setTimeout(() => {
             wx.navigateBack({

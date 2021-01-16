@@ -1,8 +1,7 @@
 // pages/change-password/change-password.js
-const app = getApp()
+const app = getApp();
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -13,26 +12,24 @@ Page({
     valid: false,
     oldPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
-  },
+  onLoad: function (options) {},
 
   onInput(evt) {
-    const {value} = evt.detail;
-    const {name} = evt.currentTarget.dataset;
+    const { value } = evt.detail;
+    const { name } = evt.currentTarget.dataset;
     if (name === 'oldPassword') {
       this.setData({
         oldPasswordValid: !!value,
       });
       if (this.data.oldPasswordValid) {
         this.setData({
-          oldPassword: value
+          oldPassword: value,
         });
       }
     } else if (name === 'newPassword') {
@@ -41,7 +38,7 @@ Page({
       });
       if (this.data.newPasswordValid) {
         this.setData({
-          newPassword: value
+          newPassword: value,
         });
       }
     } else {
@@ -50,7 +47,7 @@ Page({
       });
       if (this.data.confirmPasswordValid) {
         this.setData({
-          confirmPassword: value
+          confirmPassword: value,
         });
       }
     }
@@ -58,8 +55,8 @@ Page({
     const newPasswordValid = this.data.newPasswordValid;
     const confirmPasswordValid = this.data.confirmPasswordValid;
     this.setData({
-      valid: oldPasswordValid && newPasswordValid && confirmPasswordValid
-    })
+      valid: oldPasswordValid && newPasswordValid && confirmPasswordValid,
+    });
   },
 
   submit() {
@@ -69,8 +66,8 @@ Page({
     if (this.data.newPassword !== this.data.confirmPassword) {
       wx.showToast({
         title: '两次输入新密码不一致，请重新输入',
-        icon: "none",
-        duration: 3000
+        icon: 'none',
+        duration: 3000,
       });
       return;
     }
@@ -85,20 +82,20 @@ Page({
         idUser,
         oldPassword: this.data.oldPassword,
         newPassword: this.data.newPassword,
-        confirmNewPassword: this.data.confirmPassword
+        confirmNewPassword: this.data.confirmPassword,
       },
-      method: "POST",
+      method: 'POST',
       header: {
-        accessSide: "weixin",
-        Authorization: wx.getStorageSync("token")
+        accessSide: 'weixin',
+        Authorization: wx.getStorageSync('token'),
       },
       success(value) {
         const info = value.data;
         if (info.code === 200) {
           wx.showToast({
-            title: '密码修改成功！',
-            icon: "none",
-            duration: 2000
+            title: '修改成功',
+            icon: 'success',
+            duration: 2000,
           });
           wx.clearStorageSync();
           app.globalData.userInfo = null;
@@ -111,77 +108,63 @@ Page({
           wx.showToast({
             title: '登录已过期或未登录',
             duration: 2000,
-            icon: "none"
+            icon: 'none',
           });
           setTimeout(() => {
             wx.redirectTo({
               url: '../../wechat-login/wechat-login',
-            })
+            });
           }, 2000);
         } else {
           wx.showToast({
             title: '密码修改失败！' + info.message,
-            icon: "none",
-            duration: 3000
+            icon: 'none',
+            duration: 3000,
           });
         }
       },
       fail(res) {
         wx.showToast({
           title: res.error,
-          icon: "none",
-          duration: 2000
+          icon: 'none',
+          duration: 2000,
         });
-      }
+      },
     });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
+  onUnload: function () {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+  onPullDownRefresh: function () {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
-})
+  onShareAppMessage: function () {},
+});
