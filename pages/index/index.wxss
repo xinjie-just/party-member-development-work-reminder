@@ -6,7 +6,7 @@ page {
   width: 750rpx;
   height: 150rpx;
   margin-bottom: 140rpx;
-  background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
+  background: linear-gradient(225deg, #ec1831 0%, #910f17 100%);
   border-bottom-right-radius: 60rpx 20rpx;
   border-bottom-left-radius: 60rpx 20rpx;
   color: #fff;
@@ -32,7 +32,7 @@ page {
 }
 
 .personal .process-list::before {
-  content: "";
+  content: '';
   z-index: 201;
   position: absolute;
   top: 29rpx;
@@ -71,7 +71,6 @@ page {
   right: calc(100% / 7 / 2);
   left: calc(100% / 7 / 2);
 }
-
 
 /*wxss不支持兄弟元素选择器*/
 .personal .process-item {
@@ -140,9 +139,9 @@ page {
   padding-left: 28rpx;
   overflow-y: auto;
   background-image: linear-gradient(to bottom, white 15px, hsla(0, 0%, 100%, 0)),
-  radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
-  linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
-  radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
+    radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+    linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
+    radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
   background-repeat: no-repeat;
   background-position: top center, top center, bottom center, bottom center;
   background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
@@ -190,18 +189,17 @@ page {
   background-color: #e41e35;
   color: #fff;
 }
-.personal .step-item.active .step-status {
+.personal .step-item .step-status.active {
   background-color: #25b5bc;
 }
-.personal .step-item.completed .step-status {
+.personal .step-item .step-status.completed {
   background-color: #37464d;
 }
-
 
 .other-role .header {
   width: 750rpx;
   height: 464rpx;
-  background: linear-gradient(225deg, #EC1831 0%, #910F17 100%);
+  background: linear-gradient(225deg, #ec1831 0%, #910f17 100%);
   border-bottom-right-radius: 60rpx 20rpx;
   border-bottom-left-radius: 60rpx 20rpx;
   color: #fff;
@@ -220,7 +218,7 @@ page {
 }
 .other-role .todo-container {
   width: 694rpx;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 2rpx 30rpx 0px rgba(33, 60, 102, 0.1);
   border-radius: 30rpx;
   margin: -224rpx auto 0;
@@ -232,9 +230,9 @@ page {
   max-height: calc((60rpx + 26rpx + 26rpx) * 7);
   overflow-y: auto;
   background-image: linear-gradient(to bottom, white 15px, hsla(0, 0%, 100%, 0)),
-  radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
-  linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
-  radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
+    radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+    linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
+    radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
   background-repeat: no-repeat;
   background-position: top center, top center, bottom center, bottom center;
   background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
@@ -253,7 +251,7 @@ page {
 }
 .other-role .todo-container .todo-item-active {
   font-weight: 500;
-  color: #C8273A;
+  color: #c8273a;
 }
 .other-role .todo-container .submit-btn {
   margin: 20rpx auto 0;
@@ -263,14 +261,14 @@ page {
   text-align: center;
   border-radius: 49rpx;
   background-color: #fff;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   font-size: 36rpx;
   color: #333333;
   padding: 0;
   box-sizing: border-box;
 }
 .other-role .todo-container .submit-btn-active {
-  background: #E41E35;
+  background: #e41e35;
   color: #ffffff;
 }
 .other-role .todo-container .no-data-img {

@@ -5,42 +5,38 @@
         <view class="header">
             <image src="/assets/images/banner@3x.png" alt="发展党员流程图鉴" class="banner"></image>
         </view>
-            <!-- 
-            -- 流程条数为X给 process-list 加上 process-list-X 类
+        <!-- -- 流程条数为X给 process-list 加上 process-list-X 类
             -- 如流程条数为6给 process-list 加上 process-list-6 类
-            -- 默认为5条
-            -->
+            -- 默认为5条 -->
         <view class="process-list">
-            <!-- 
-            -- 进行中状态给 process-item 加上 active 类
-            -- 已完成状态给 process-item 加上 completed 类
-            -->
+            <!-- -- 进行中状态给 process-item 加上 active 类
+            -- 已完成状态给 process-item 加上 completed 类 -->
             <view wx:for="{{stages}}" wx:key="index" class="process-item process-item-{{stages.length}} {{item.idStage === selectedIdStage ? 'active' : ''}}" catchtap="selectProcessItem" data-id="{{item.idStage}}">
-            <text class="process-index">{{item.sort}}</text>
-            <text class="process-text">{{item.formatStageName || item.stageName}}</text>
+                <text class="process-index">{{item.sort}}</text>
+                <text class="process-text">{{item.formatStageName || item.stageName}}</text>
             </view>
-            
         </view>
         <view class="step-container">
             <view class="step-list">
-            <!-- 
-            -- 进行中状态给 step-item 加上 active 类
-            -- 已完成状态给 step-item 加上 completed 类
-            -- nodeState 已完成1/已开始未完成0/未开始-1
-            -->
-            <view class="step-item" wx:for="{{currentStageInfo}}" wx:key="index">
-                <view class="step-text">
-                <view class="which-step">第<text class="num">{{index + 1}}</text>步</view>
-                <text class="things">{{item.nodeName}}</text>
+                <!-- -- 进行中状态给  step-status 加上 active 类
+            -- 已完成状态给  step-status 加上 completed 类
+            -- nodeState 已完成1/已开始未完成0/未开始-1 -->
+                <view class="step-item" wx:for="{{currentStageInfo}}" wx:key="index">
+                    <view class="step-text">
+                        <view class="which-step">
+                            第
+                            <text class="num">{{item.stepIndex}}</text>
+                            步
+                        </view>
+                        <text class="things">{{item.nodeName}}</text>
+                    </view>
+                    <view class="step-status completed" wx:if="{{item.nodeState === 1}}">已完成</view>
+                    <view class="step-status active" wx:elif="{{item.nodeState === 0}}">进行中</view>
+                    <view class="step-status" wx:else>待开始</view>
                 </view>
-                <view class="step-status completed" wx:if="{{item.nodeState === 1}}">已完成</view>
-                <view class="step-status active" wx:elif="{{item.nodeState === 0}}">进行中</view>
-                <view class="step-status" wx:else>待开始</view>
-            </view>
             </view>
         </view>
     </view>
-
     <!-- 其它角色 -->
     <view wx:if="{{!isPersonal}}" class="other-role">
         <view class="header">
@@ -51,9 +47,13 @@
         <view class="todo-container">
             <block wx:if="{{!!total}}">
                 <view class="todo-list">
-                    <text class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">{{item.realName}}在{{item.nodeName}}，待你处理</text>
+                    <text class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">
+                        {{item.realName}}在{{item.nodeName}}，待你处理
+                    </text>
                 </view>
-                <view class="submit-btn {{selectedId ? 'submit-btn-active' : ''}}" catchtap="handleItem">去处理</view>
+                <view class="submit-btn {{selectedId ? 'submit-btn-active' : ''}}" catchtap="handleItem">
+                    去处理
+                </view>
             </block>
             <image src="../../assets/images/img_nodata.png" class="no-data-img" wx:if="{{!total}}"></image>
         </view>

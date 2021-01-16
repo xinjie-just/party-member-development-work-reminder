@@ -24,7 +24,7 @@ Page({
       loading: true,
     });
     const storageUserOtherInfo = wx.getStorageSync('userOtherInfo');
-    console.log('通过openid获取到的用户信息', storageUserOtherInfo);
+    console.log('用户信息', storageUserOtherInfo);
 
     let idRole = null;
     let userName = '';
@@ -76,13 +76,14 @@ Page({
     this.getTodoList();
   },
 
+  // 获取所有角色
   getAllRole() {
     let that = this;
     wx.request({
       url: `${app.globalData.hostname}/role/getPage`,
       data: {
         pageNo: 1,
-        pageSize: 99,
+        pageSize: 999,
       },
       header: {
         accessSide: 'weixin',
@@ -95,23 +96,28 @@ Page({
             roles: info.data.page.records,
             roleTotal: info.data.page.total,
           });
-          that.data.roles.map((item) => {
-            if (item.idRole === that.data.idRole) {
-              if (item.roleName === '个人') {
-                that.setData({
-                  isPersonal: true,
-                });
-                that.queryAllStage();
-                that.queryPersonAllNodeState();
-                return;
+          const roleTotal = that.data.roleTotal;
+          if (!!roleTotal) {
+            for (let i = 0; i < roleTotal; i++) {
+              const item = that.data.roles[i];
+              if (item.idRole === that.data.idRole) {
+                if (item.roleName === '个人') {
+                  that.setData({
+                    isPersonal: true,
+                  });
+                  that.queryPersonAllNodeState();
+                } else {
+                  that.setData({
+                    isPersonal: false,
+                  });
+                  that.getTodoList();
+                }
+                break; // 登录进来的用户的角色在全部角色中已经匹配到了自己的身份
               } else {
-                that.setData({
-                  isPersonal: false,
-                });
-                that.getTodoList();
+                continue;
               }
             }
-          });
+          }
         } else if (info.code === 401) {
           wx.showToast({
             title: '登录已过期或未登录',
@@ -254,6 +260,8 @@ Page({
             if (item.stageName.includes('：')) {
               const index = item.stageName.indexOf('：');
               formatStageName = item.stageName.substring(index + 1);
+            } else {
+              formatStageName = item.stageName;
             }
             return {
               ...item,
@@ -299,16 +307,6 @@ Page({
     });
   },
 
-  // 选择某一个阶段
-  selectProcessItem(e) {
-    console.log('选择的对象', e.currentTarget.dataset);
-    const selectedIdStage = e.currentTarget.dataset.id;
-    this.setData({
-      selectedIdStage,
-    });
-    this.getStepStateInfo();
-  },
-
   //查询个人用户所有节点状态
   queryPersonAllNodeState() {
     let that = this;
@@ -325,9 +323,16 @@ Page({
         const info = res.data;
         console.log('所有节点状态', info.data);
         if (info.code === 200) {
-          that.setData({
-            allNodeStateInfo: info.data,
+          const allNodeStateInfo = info.data.map((item, index) => {
+            return {
+              ...item,
+              stepIndex: index + 1,
+            };
           });
+          that.setData({
+            allNodeStateInfo,
+          });
+          that.queryAllStage();
         } else if (info.code === 401) {
           wx.showToast({
             title: '登录已过期或未登录',
@@ -358,6 +363,16 @@ Page({
         });
       },
     });
+  },
+
+  // 选择某一个阶段
+  selectProcessItem(e) {
+    console.log('选择的对象', e.currentTarget.dataset);
+    const selectedIdStage = e.currentTarget.dataset.id;
+    this.setData({
+      selectedIdStage,
+    });
+    this.getStepStateInfo();
   },
 
   // 个人用户所有节点状态去匹配当前的步骤
