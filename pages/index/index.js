@@ -12,6 +12,7 @@ Page({
     roles: [],
     roleTotal: 0,
     total: 0,
+    selectedId: null,
     stages: [],
     selectedIdStage: null,
     idUser: null,
@@ -75,6 +76,11 @@ Page({
     const token = wx.getStorageSync('token');
     if (token) {
       this.getTodoList();
+    }
+    if (this.data.selectedId) {
+      this.setData({
+        selectedId: null,
+      });
     }
   },
 
