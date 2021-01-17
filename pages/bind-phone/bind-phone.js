@@ -171,7 +171,7 @@ Page({
             dataState: bindRes.dataState, // 0 锁定, 1 正常状态, 2 已经假删除
             idRole: bindRes.idRole,
           };
-          wx.setStorageSync('userInfo', {
+          wx.setStorageSync('userOtherInfo', {
             ...userInfoStorage,
             ...userInfobindRes,
           });
