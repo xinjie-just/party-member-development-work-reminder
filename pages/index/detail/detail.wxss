@@ -1,6 +1,6 @@
 /* pages/index/detail/detail.wxss */
 page {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .page {
@@ -14,12 +14,12 @@ page {
 .header {
   display: block;
   padding: 20rpx 30rpx;
-  line-height: 1.6em;
+  line-height: 1.4em;
   font-size: 38rpx;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #000000;
-  border-bottom: 1rpx solid #E5E5E5;
+  border-bottom: 1rpx solid #e5e5e5;
 }
 .body {
   padding: 20rpx 30rpx 60rpx;
@@ -33,7 +33,7 @@ page {
   margin-bottom: 20rpx;
 }
 .body .iconfont {
-  color: #C8273A;
+  color: #c8273a;
   margin-right: 12rpx;
 }
 .body .label {
@@ -45,6 +45,19 @@ page {
   display: block;
   flex: 1;
 }
+.body .content-value {
+  max-height: 900rpx;
+  overflow-y: auto;
+  background-image: linear-gradient(to bottom, white 15px, hsla(0, 0%, 100%, 0)),
+    radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
+    linear-gradient(to top, white 15px, hsla(0, 0%, 100%, 0)),
+    radial-gradient(at bottom, rgba(0, 0, 0, 0.2), transparent 70%);
+  background-repeat: no-repeat;
+  background-position: top center, top center, bottom center, bottom center;
+  background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
+  background-attachment: local, scroll, local, scroll;
+}
+
 .body .submit-btn {
   display: block;
   margin: 50rpx auto 0;

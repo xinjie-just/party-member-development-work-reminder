@@ -203,31 +203,31 @@ page {
   border-bottom-right-radius: 60rpx 20rpx;
   border-bottom-left-radius: 60rpx 20rpx;
   color: #fff;
-  padding: 54rpx 58rpx 220rpx;
+  padding: 34rpx 48rpx 200rpx;
   box-sizing: border-box;
 }
 .other-role .header .welcome {
   display: block;
   font-size: 40rpx;
-  line-height: 40rpx;
-  margin-bottom: 30rpx;
+  line-height: 1.4em;
+  margin-bottom: 0.8em;
 }
 .other-role .header .tips {
-  font-size: 46rpx;
-  line-height: 46rpx;
+  font-size: 36rpx;
+  line-height: 1.5em;
 }
 .other-role .todo-container {
-  width: 694rpx;
+  width: 710rpx;
   background: #ffffff;
   box-shadow: 0px 2rpx 30rpx 0px rgba(33, 60, 102, 0.1);
   border-radius: 30rpx;
-  margin: -224rpx auto 0;
+  margin: -244rpx auto 0;
   box-sizing: border-box;
-  padding: 20rpx 30rpx 60rpx;
+  padding: 20rpx 30rpx 30rpx;
 }
 .other-role .todo-container .todo-list {
   font-size: 32rpx;
-  max-height: calc((60rpx + 26rpx + 26rpx) * 7);
+  max-height: 880rpx;
   overflow-y: auto;
   background-image: linear-gradient(to bottom, white 15px, hsla(0, 0%, 100%, 0)),
     radial-gradient(at top, rgba(0, 0, 0, 0.2), transparent 70%),
@@ -239,12 +239,32 @@ page {
   background-attachment: local, scroll, local, scroll;
 }
 .other-role .todo-container .todo-item {
-  display: block;
-  line-height: 56rpx;
-  padding-top: 28rpx;
-  padding-bottom: 28rpx;
+  display: flex;
+  font-size: 32rpx;
+  line-height: 44rpx;
+  padding-top: 22rpx;
+  padding-bottom: 22rpx;
   color: #333333;
+}
+.other-role .todo-container .todo-item .index {
+  width: 66rpx;
+}
+.other-role .todo-container .todo-item .content {
+  flex: 1;
   word-break: break-all;
+}
+.other-role .todo-container .todo-item .reminder {
+  margin-top: 18rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+  /*多行文本省略*/
+  display: -webkit-box !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 88rpx;
 }
 .other-role .todo-container .todo-item:not(:last-of-type) {
   border-bottom: 1rpx solid #e5e5e5;

@@ -11,6 +11,7 @@ Page({
     idRole: null,
     roles: [],
     roleTotal: 0,
+    total: 0,
     stages: [],
     selectedIdStage: null,
     idUser: null,
@@ -229,17 +230,19 @@ Page({
     let realName = '';
     let nodeName = '';
     let reminder = '';
+    let content = '';
     if (this.data.todoList) {
       this.data.todoList.forEach((item) => {
         if (item.id === selectedId) {
           realName = item.realName;
           nodeName = item.nodeName;
           reminder = item.reminder;
+          content = item.content;
         }
       });
     }
     wx.navigateTo({
-      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}`,
+      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
     });
   },
 

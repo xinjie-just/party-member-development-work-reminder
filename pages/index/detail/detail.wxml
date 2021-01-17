@@ -1,18 +1,22 @@
-<!--pages/index/detail/detail.wxml-->
+<!-- pages/index/detail/detail.wxml -->
 <view class="page">
   <text class="header">{{reminder}}</text>
   <view class="body">
-    <view class="name">
+    <view class="item name">
       <text class="iconfont icon-user"></text>
       <text class="label">姓名</text>
       <text class="value">{{realName}}</text>
     </view>
-    <view class="step">
+    <view class="item step">
       <text class="iconfont icon-step"></text>
       <text class="label">步骤</text>
       <view class="value">{{nodeName}}</view>
     </view>
+    <view class="item content">
+      <text class="iconfont icon-content"></text>
+      <text class="label">详情</text>
+      <view class="value content-value">{{content}}</view>
+    </view>
     <view class="submit-btn" catchtap="handleTask">确认已办理</view>
   </view>
 </view>
-

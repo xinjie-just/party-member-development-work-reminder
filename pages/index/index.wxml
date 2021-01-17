@@ -41,15 +41,19 @@
     <view wx:if="{{!isPersonal}}" class="other-role">
         <view class="header">
             <text class="welcome">您好，{{userName}}</text>
-            <text wx:if="{{!!total}}" class="tips">您有如下代办事项</text>
+            <text wx:if="{{!!total}}" class="tips">您有如下 {{total}} 条代办事项，待你处理</text>
             <text wx:if="{{!total}}" class="tips">您暂无代办事项</text>
         </view>
         <view class="todo-container">
             <block wx:if="{{!!total}}">
                 <view class="todo-list">
-                    <text class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">
-                        {{item.realName}}在{{item.nodeName}}，待你处理
-                    </text>
+                    <view class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">
+                        <view class="index">{{index + 1}}.</view>
+                        <view class="content">
+                            <view>{{item.realName}}在{{item.nodeName}}，有提醒事项：</view>
+                            <view class="reminder">{{item.reminder}}</view>
+                        </view>
+                    </view>
                 </view>
                 <view class="submit-btn {{selectedId ? 'submit-btn-active' : ''}}" catchtap="handleItem">
                     去处理

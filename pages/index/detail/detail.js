@@ -11,6 +11,7 @@ Page({
     realName: '',
     nodeName: '',
     reminder: '',
+    content: '',
   },
 
   /**
@@ -23,6 +24,7 @@ Page({
       realName: options.realName,
       nodeName: options.nodeName,
       reminder: options.reminder,
+      content: options.content,
     });
     this.updateTaskReadTime(Number(this.data.id));
   },
