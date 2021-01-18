@@ -19,6 +19,7 @@ Page({
     phoneNum: null,
     allNodeStateInfo: [],
     currentStageInfo: [],
+    activeSteps: [], // 处于进行中的步骤的idNode的集合
   },
 
   onLoad: function () {
@@ -75,7 +76,11 @@ Page({
   onShow: function () {
     const token = wx.getStorageSync('token');
     if (token) {
-      this.getTodoList();
+      if (this.data.isPersonal) {
+        this.queryPersonAllNodeState();
+      } else {
+        this.getTodoList();
+      }
     }
     if (this.data.selectedId) {
       this.setData({
@@ -164,6 +169,7 @@ Page({
     });
   },
 
+  // 获取待办事项
   getTodoList() {
     let that = this;
     wx.request({
@@ -183,6 +189,24 @@ Page({
           that.setData({
             todoList: info.data.page.records,
             total: info.data.page.total,
+          });
+          const activeSteps = that.data.activeSteps;
+          const activeStepsLen = activeSteps.length;
+          const todoList = that.data.todoList;
+          const todoListLen = todoList.length;
+          let allNodeStateInfo = that.data.allNodeStateInfo;
+          // allNodeStateInfo
+          for (let i = 0; i < activeStepsLen; i++) {
+            for (let j = 0; j < todoListLen; j++) {
+              if (activeSteps[i].idNode === todoList[j].idNode) {
+                allNodeStateInfo[i]['hasTodoItem'] = true;
+                allNodeStateInfo[i]['todoItem'] = todoList[j];
+                break;
+              }
+            }
+          }
+          that.setData({
+            allNodeStateInfo,
           });
         } else if (info.code === 401) {
           wx.showToast({
@@ -222,6 +246,8 @@ Page({
       selectedId: e.currentTarget.dataset.id,
     });
   },
+
+  // 处理代办事项
   handleItem() {
     if (!this.data.selectedId) {
       wx.showToast({
@@ -250,6 +276,28 @@ Page({
     wx.navigateTo({
       url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
     });
+  },
+
+  // 个人页面处理代办事项
+  personalHandleItem(evt) {
+    console.log('个人页面evt', evt);
+    const { handleItem } = evt.currentTarget.dataset;
+    if (handleItem) {
+      const id = handleItem.id;
+      const realName = handleItem.realName;
+      const nodeName = handleItem.nodeName;
+      const reminder = handleItem.reminder;
+      const content = handleItem.content;
+      wx.navigateTo({
+        url: `./detail/detail?id=${id}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
+      });
+    } else {
+      wx.showToast({
+        title: `数据有误！${evt.currentTarget.dataset}`,
+        duration: 3000,
+        icon: 'none',
+      });
+    }
   },
 
   //查询所有阶段
@@ -333,16 +381,33 @@ Page({
         const info = res.data;
         console.log('所有节点状态', info.data);
         if (info.code === 200) {
+          const activeSteps = [];
           const allNodeStateInfo = info.data.map((item, index) => {
             return {
               ...item,
               stepIndex: index + 1,
+              hasTodoItem: false,
+              todoItem: null,
             };
+          });
+          allNodeStateInfo.forEach((value) => {
+            if (value.nodeState === 0) {
+              // 该节点状态为进行中
+              activeSteps.push({
+                stepIndex: value.stepIndex,
+                idNode: value.idNode,
+              });
+            }
           });
           that.setData({
             allNodeStateInfo,
+            activeSteps,
           });
           that.queryAllStage();
+          if (that.data.activeSteps.length) {
+            //假如有处于进行中的步骤，则去获取待办事项，如果待办事项的 idNode 和 activeSteps 中的 idNode 相等，则显示办理
+            that.getTodoList();
+          }
         } else if (info.code === 401) {
           wx.showToast({
             title: '登录已过期或未登录',

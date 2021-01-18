@@ -134,7 +134,7 @@ page {
 }
 
 /* 步骤 */
-.personal .step-container {
+/* .personal .step-container {
   padding-right: 28rpx;
   padding-left: 28rpx;
   overflow-y: auto;
@@ -146,19 +146,23 @@ page {
   background-position: top center, top center, bottom center, bottom center;
   background-size: 100% 50px, 100% 15px, 100% 50px, 100% 15px;
   background-attachment: local, scroll, local, scroll;
+} */
+.personal .step-list {
+  padding: 30rpx;
 }
-
 .personal .step-item {
   background-color: #fff;
   box-shadow: 0 4rpx 24rpx 0 rgba(52, 80, 106, 0.1);
   border-radius: 14rpx;
   padding: 36rpx 0 36rpx 36rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 .personal .step-item:not(:last-of-type) {
   margin-bottom: 20rpx;
+}
+.personal .step-item .step-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .personal .step-item .step-text {
   flex: 1;
@@ -194,6 +198,19 @@ page {
 }
 .personal .step-item .step-status.completed {
   background-color: #37464d;
+}
+.personal .step-item .personal-to-handle {
+  margin: 30rpx auto 0;
+  width: 230rpx;
+  height: 78rpx;
+  line-height: 78rpx;
+  text-align: center;
+  border-radius: 78rpx;
+  font-size: 30rpx;
+  padding: 0;
+  box-sizing: border-box;
+  background: #e41e35;
+  color: #ffffff;
 }
 
 .other-role .header {

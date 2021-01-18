@@ -16,12 +16,12 @@
                 <text class="process-text">{{item.formatStageName || item.stageName}}</text>
             </view>
         </view>
-        <view class="step-container">
-            <view class="step-list">
-                <!-- -- 进行中状态给  step-status 加上 active 类
+        <view class="step-list">
+            <!-- -- 进行中状态给  step-status 加上 active 类
             -- 已完成状态给  step-status 加上 completed 类
             -- nodeState 已完成1/已开始未完成0/未开始-1 -->
-                <view class="step-item" wx:for="{{currentStageInfo}}" wx:key="index">
+            <view class="step-item" wx:for="{{currentStageInfo}}" wx:key="index">
+                <view class="step-item-header">
                     <view class="step-text">
                         <view class="which-step">
                             第
@@ -33,6 +33,9 @@
                     <view class="step-status completed" wx:if="{{item.nodeState === 1}}">已完成</view>
                     <view class="step-status active" wx:elif="{{item.nodeState === 0}}">进行中</view>
                     <view class="step-status" wx:else>待开始</view>
+                </view>
+                <view class="step-item-body personal-to-handle" wx:if="{{item.hasTodoItem}}" data-handle-item="{{item.todoItem}}" catchtap="personalHandleItem">
+                    去处理
                 </view>
             </view>
         </view>
