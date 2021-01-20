@@ -199,8 +199,9 @@ Page({
           for (let i = 0; i < activeStepsLen; i++) {
             for (let j = 0; j < todoListLen; j++) {
               if (activeSteps[i].idNode === todoList[j].idNode) {
-                allNodeStateInfo[i]['hasTodoItem'] = true;
-                allNodeStateInfo[i]['todoItem'] = todoList[j];
+                const index = activeSteps[i]['stepIndex'];
+                allNodeStateInfo[index - 1]['hasTodoItem'] = true;
+                allNodeStateInfo[index - 1]['todoItem'] = todoList[j];
                 break;
               }
             }
