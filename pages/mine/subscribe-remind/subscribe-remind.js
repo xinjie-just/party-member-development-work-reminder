@@ -2,7 +2,10 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    submitLoading: false,
+    timer: null,
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -12,6 +15,17 @@ Page({
   },
 
   subscribe() {
+    clearTimeout(this.data.timer);
+    const timer = setTimeout(() => {
+      this.setData({
+        submitLoading: true,
+      });
+    }, 1000);
+    this.setData({
+      timer,
+    });
+
+    let that = this;
     wx.requestSubscribeMessage({
       tmplIds: ['AMMS8pdsuRjk7e77kZWPyTYWHT4vE3x5sPNJ_74Pi7Q'],
       success(res) {
@@ -42,6 +56,25 @@ Page({
           });
         }, 2000);
       },
+      complete() {
+        that.setData({
+          submitLoading: false,
+        });
+      },
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+    clearTimeout(this.data.timer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+    clearTimeout(this.data.timer);
   },
 });

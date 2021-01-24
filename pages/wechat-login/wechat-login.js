@@ -62,7 +62,7 @@ Page({
     let that = this;
     wx.login({
       success(data) {
-        console.log('code', data.code);
+        // console.log('code', data.code);
         if (data.code) {
           // 发起网络请求
           wx.request({

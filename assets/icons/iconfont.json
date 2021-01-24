@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13392027",
+      "name": "eye-invisible",
+      "font_class": "eye-invisible",
+      "unicode": "e76a",
+      "unicode_decimal": 59242
+    },
+    {
+      "icon_id": "15693993",
+      "name": "eye",
+      "font_class": "eye",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
       "icon_id": "18813471",
       "name": "内容",
       "font_class": "content",

@@ -11,6 +11,9 @@
         <input type="text" id="phone" data-name="phone" class="form-control-input" placeholder="请输入手机号" value="{{phone}}" bindinput="onInput" />
       </view>
     </view>
-    <view class="submit-btn {{valid ? '' : 'disabled'}}" catchtap="bindPhone">确定</view>
+    <view class="submit-btn {{valid ? '' : 'disabled'}}" catchtap="bindPhone">
+      <text wx:if="{{submitLoading}}" class="weui-loading components-loading-loading--weui-loading"></text>
+      <text>绑定</text>
+    </view>
   </form>
 </view>

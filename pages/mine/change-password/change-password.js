@@ -12,12 +12,34 @@ Page({
     oldPassword: '',
     newPassword: '',
     confirmPassword: '',
+    submitLoading: false,
+    timer: null,
+    oldPasswordVisible: false,
+    newPasswordVisible: false,
+    confirmPasswordVisible: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {},
+
+  passwordIconVisible(evt) {
+    const { name } = evt.currentTarget.dataset;
+    if (name === 'oldPassword') {
+      this.setData({
+        oldPasswordVisible: !this.data.oldPasswordVisible,
+      });
+    } else if (name === 'newPassword') {
+      this.setData({
+        newPasswordVisible: !this.data.newPasswordVisible,
+      });
+    } else {
+      this.setData({
+        confirmPasswordVisible: !this.data.confirmPasswordVisible,
+      });
+    }
+  },
 
   onInput(evt) {
     const { value } = evt.detail;
@@ -71,8 +93,17 @@ Page({
       return;
     }
 
-    // console.log("表单验证通过");
-    // console.log("旧密码：", this.data.oldPassword, "--新密码：", this.data.newPassword, "--确认密码：", this.data.confirmPassword);
+    clearTimeout(this.data.timer);
+    const timer = setTimeout(() => {
+      this.setData({
+        submitLoading: true,
+      });
+    }, 1000);
+    this.setData({
+      timer,
+    });
+
+    let that = this;
     const storageUserInfo = wx.getStorageSync('userInfo');
     const idUser = storageUserInfo.idUser;
     wx.request({
@@ -129,6 +160,25 @@ Page({
           duration: 2000,
         });
       },
+      complete() {
+        that.setData({
+          submitLoading: false,
+        });
+      },
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+    clearTimeout(this.data.timer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+    clearTimeout(this.data.timer);
   },
 });

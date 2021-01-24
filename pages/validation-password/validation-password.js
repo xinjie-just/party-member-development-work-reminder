@@ -7,7 +7,12 @@ Page({
   data: {
     phone: '',
     password: '',
-    valid: false,
+    phoneValid: false,
+    passwordValid: false,
+    passwordVisible: false, // 密码不明文显示
+    hasPhone: false,
+    submitLoading: false,
+    timer: null,
   },
 
   /**
@@ -15,35 +20,47 @@ Page({
    */
   onLoad: function (options) {
     const phone = options.phoneNum;
+    if (!!phone) {
+      this.setData({
+        phone,
+        hasPhone: true,
+      });
+    }
+  },
+
+  passwordIconVisible() {
     this.setData({
-      phone,
+      passwordVisible: !this.data.passwordVisible,
     });
   },
 
   onInput(evt) {
     const { value } = evt.detail;
     const { name } = evt.currentTarget.dataset;
+    const PHONE_REG_EXP = /^1\d{10}$/;
+    let result = false;
     if (name === 'password') {
       this.setData({
-        valid: !!value,
+        passwordValid: !!value,
       });
-      if (this.data.valid) {
+      if (this.data.passwordValid) {
         this.setData({
           password: value,
         });
       }
+    } else if (name === 'phone') {
+      // 避免出现手机号没有获取到，用户手动输入
+      result = PHONE_REG_EXP.test(value);
+      this.setData({
+        phoneValid: result,
+        phone: value,
+      });
     }
   },
 
   validationPassword() {
-    if (!this.data.password) {
-      wx.showToast({
-        title: '密码必填！',
-        duration: 2000,
-        icon: 'none',
-      });
-      return;
-    }
+    const phoneValid = this.data.phoneValid;
+    const passwordValid = this.data.passwordValid;
     if (!this.data.phone) {
       wx.showToast({
         title: '手机号码必填！',
@@ -51,60 +68,89 @@ Page({
         icon: 'none',
       });
       return;
-    }
-    let that = this;
-    wx.request({
-      url: `${app.globalData.hostname}/user/phoneLogin`,
-      method: 'POST',
-      data: {
-        phone: this.data.phone,
-        password: this.data.password,
-      },
-      header: {
-        accessSide: 'weixin',
-        Authorization: wx.getStorageSync('token'),
-      },
-      success(res) {
-        const info = res.data;
-        if (info.code === 200) {
-          // 密码验证成功，绑定手机号，然后跳转首页
-          wx.showToast({
-            title: '密码验证成功！',
-            duration: 2000,
-            icon: 'none',
-          });
-          const realName = info.data.user.realName;
-          that.bindPhone(realName);
-        } else if (info.code === 401) {
-          wx.showToast({
-            title: '登录已过期或未登录',
-            duration: 2000,
-            icon: 'none',
-          });
-          setTimeout(() => {
+    } else if (!phoneValid) {
+      wx.showToast({
+        title: '手机号格式不正确',
+        icon: 'none',
+      });
+      return;
+    } else if (!passwordValid) {
+      wx.showToast({
+        title: '密码必填！',
+        duration: 2000,
+        icon: 'none',
+      });
+      return;
+    } else {
+      clearTimeout(this.data.timer);
+      const timer = setTimeout(() => {
+        this.setData({
+          submitLoading: true,
+        });
+      }, 1000);
+      this.setData({
+        timer,
+      });
+
+      let that = this;
+      wx.request({
+        url: `${app.globalData.hostname}/user/phoneLogin`,
+        method: 'POST',
+        data: {
+          phone: this.data.phone,
+          password: this.data.password,
+        },
+        header: {
+          accessSide: 'weixin',
+          Authorization: wx.getStorageSync('token'),
+        },
+        success(res) {
+          const info = res.data;
+          if (info.code === 200) {
+            // 密码验证成功，绑定手机号，然后跳转首页
+            wx.showToast({
+              title: '密码验证成功！',
+              duration: 2000,
+              icon: 'none',
+            });
+            const realName = info.data.user.realName;
+            that.bindPhone(realName);
+          } else if (info.code === 401) {
+            wx.showToast({
+              title: '登录已过期或未登录',
+              duration: 2000,
+              icon: 'none',
+            });
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '/pages/wechat-login/wechat-login',
+              });
+            }, 2000);
+          } else {
+            wx.showToast({
+              title: info.message || '密码验证失败，请联系管理员！',
+              duration: 2000,
+              icon: 'none',
+            });
             wx.redirectTo({
               url: '/pages/wechat-login/wechat-login',
             });
-          }, 2000);
-        } else {
+          }
+        },
+        fail(res) {
           wx.showToast({
-            title: info.message || '密码验证失败，请联系管理员！',
-            duration: 2000,
+            title: '密码验证失败，请联系管理员！' + res.error,
             icon: 'none',
+            duration: 2000,
           });
-          wx.redirectTo({
-            url: '/pages/wechat-login/wechat-login',
+        },
+        complete() {
+          that.setData({
+            submitLoading: false,
           });
-        }
-      },
-      fail(res) {
-        wx.showToast({
-          title: '密码验证失败，请联系管理员！' + res.error,
-          icon: 'none',
-          duration: 2000,
-        });
-      },
-    });
+        },
+      });
+    }
   },
 
   // 绑定手机号
@@ -172,5 +218,19 @@ Page({
         });
       },
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+    clearTimeout(this.data.timer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+    clearTimeout(this.data.timer);
   },
 });

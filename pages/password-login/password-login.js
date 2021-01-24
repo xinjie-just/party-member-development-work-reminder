@@ -9,6 +9,15 @@ Page({
     phone: '',
     phoneValid: false,
     passwordValid: false,
+    submitLoading: false,
+    timer: null,
+    passwordVisible: false,
+  },
+
+  passwordIconVisible() {
+    this.setData({
+      passwordVisible: !this.data.passwordVisible,
+    });
   },
 
   onInput(evt) {
@@ -48,9 +57,6 @@ Page({
   submit() {
     const phoneValid = this.data.phoneValid;
     const passwordValid = this.data.passwordValid;
-    // if (!(phoneValid && passwordValid)) {
-    //   return;
-    // }
     if (!this.data.phone) {
       wx.showToast({
         title: '手机号必填',
@@ -67,6 +73,17 @@ Page({
         icon: 'none',
       });
     } else {
+      clearTimeout(this.data.timer);
+      const timer = setTimeout(() => {
+        this.setData({
+          submitLoading: true,
+        });
+      }, 1000);
+      this.setData({
+        timer,
+      });
+
+      let that = this;
       wx.request({
         url: `${app.globalData.hostname}/user/phoneLogin`,
         data: {
@@ -104,7 +121,26 @@ Page({
             duration: 2000,
           });
         },
+        complete() {
+          that.setData({
+            submitLoading: false,
+          });
+        },
       });
     }
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+    clearTimeout(this.data.timer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+    clearTimeout(this.data.timer);
   },
 });

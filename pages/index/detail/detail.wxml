@@ -16,6 +16,9 @@
       <text class="label">详情</text>
       <view class="value content-value">{{content}}</view>
     </view>
-    <view class="submit-btn" catchtap="handleTask">确认已办理</view>
+    <view class="submit-btn" catchtap="handleTask">
+      <text wx:if="{{submitLoading}}" class="weui-loading components-loading-loading--weui-loading"></text>
+      <text>确认已办理</text>
+    </view>
   </view>
 </view>

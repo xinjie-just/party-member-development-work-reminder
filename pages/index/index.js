@@ -183,7 +183,7 @@ Page({
       },
       success(res) {
         const info = res.data;
-        console.log('待办事项', info.data);
+        // console.log('待办事项', info.data);
         if (info.code === 200) {
           that.setData({
             todoList: info.data.page.records,
@@ -241,7 +241,7 @@ Page({
     });
   },
   selectTodoItem(e) {
-    console.log('evt111', e);
+    // console.log('evt111', e);
     this.setData({
       selectedId: e.currentTarget.dataset.id,
     });
@@ -257,7 +257,7 @@ Page({
       });
       return;
     }
-    console.log('selectedId', this.data.selectedId);
+    // console.log('selectedId', this.data.selectedId);
     const selectedId = this.data.selectedId;
 
     wx.navigateTo({
@@ -267,7 +267,7 @@ Page({
 
   // 个人页面处理代办事项
   personalHandleItem(evt) {
-    console.log('个人页面evt', evt);
+    // console.log('个人页面evt', evt);
     const { handleItem } = evt.currentTarget.dataset;
     if (handleItem) {
       const id = handleItem.id;
@@ -294,7 +294,7 @@ Page({
       },
       success(res) {
         const info = res.data;
-        console.log('所有阶段', info.data);
+        // console.log('所有阶段', info.data);
         if (info.code === 200) {
           const stages = info.data.map((item) => {
             let formatStageName = '';
@@ -362,7 +362,7 @@ Page({
       },
       success(res) {
         const info = res.data;
-        console.log('所有节点状态', info.data);
+        // console.log('所有节点状态', info.data);
         if (info.code === 200) {
           const activeSteps = [];
           const allNodeStateInfo = info.data.map((item, index) => {
@@ -425,7 +425,7 @@ Page({
 
   // 选择某一个阶段
   selectProcessItem(e) {
-    console.log('选择的对象', e.currentTarget.dataset);
+    // console.log('选择的对象', e.currentTarget.dataset);
     const selectedIdStage = e.currentTarget.dataset.id;
     this.setData({
       selectedIdStage,

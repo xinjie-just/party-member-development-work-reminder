@@ -13,6 +13,8 @@ Page({
     content: '',
     todoList: [],
     todoTotal: 0,
+    submitLoading: false,
+    timer: null,
   },
 
   /**
@@ -21,7 +23,7 @@ Page({
   onLoad: function (options) {
     this.getTodoList();
 
-    console.log('代办事项ID', options.id);
+    // console.log('代办事项ID', options.id);
     this.setData({
       id: options.id,
     });
@@ -43,7 +45,7 @@ Page({
       },
       success(res) {
         const info = res.data;
-        console.log('待办事项', info.data);
+        // console.log('待办事项', info.data);
         if (info.code === 200) {
           that.setData({
             todoList: info.data.page.records,
@@ -144,6 +146,17 @@ Page({
 
   // 处理提醒事项
   handleTask() {
+    clearTimeout(this.data.timer);
+    const timer = setTimeout(() => {
+      this.setData({
+        submitLoading: true,
+      });
+    }, 1000);
+    this.setData({
+      timer,
+    });
+
+    let that = this;
     wx.request({
       url: `${app.globalData.hostname}/miniProgram/handleRemindTask`,
       data: {
@@ -197,6 +210,25 @@ Page({
           duration: 2000,
         });
       },
+      complete() {
+        that.setData({
+          submitLoading: false,
+        });
+      },
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+    clearTimeout(this.data.timer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+    clearTimeout(this.data.timer);
   },
 });

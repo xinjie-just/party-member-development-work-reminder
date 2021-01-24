@@ -9,6 +9,8 @@ Page({
     phoneValid: false,
     usernameValid: false,
     valid: false,
+    submitLoading: false,
+    timer: null,
   },
 
   /**
@@ -81,6 +83,16 @@ Page({
 
   // 通过手机号查询用户信息
   queryUserByPhoneNum() {
+    clearTimeout(this.data.timer);
+    const timer = setTimeout(() => {
+      this.setData({
+        submitLoading: true,
+      });
+    }, 1000);
+    this.setData({
+      timer,
+    });
+
     let that = this;
     wx.request({
       url: `${app.globalData.hostname}/user/queryUserByPhoneNum`,
@@ -128,6 +140,11 @@ Page({
           title: res.error,
           icon: 'none',
           duration: 2000,
+        });
+      },
+      complete() {
+        that.setData({
+          submitLoading: false,
         });
       },
     });
@@ -210,5 +227,19 @@ Page({
         });
       },
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+    clearTimeout(this.data.timer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+    clearTimeout(this.data.timer);
   },
 });
