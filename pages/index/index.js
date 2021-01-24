@@ -10,7 +10,8 @@ Page({
     idRole: null,
     roles: [],
     roleTotal: 0,
-    total: 0,
+    todoList: [],
+    todoTotal: 0,
     selectedId: null,
     stages: [],
     selectedIdStage: null,
@@ -186,7 +187,7 @@ Page({
         if (info.code === 200) {
           that.setData({
             todoList: info.data.page.records,
-            total: info.data.page.total,
+            todoTotal: info.data.page.total,
           });
           const activeSteps = that.data.activeSteps;
           const activeStepsLen = activeSteps.length;
@@ -221,7 +222,7 @@ Page({
         } else {
           that.setData({
             todoList: [],
-            total: 0,
+            todoTotal: 0,
           });
           wx.showToast({
             title: info.message || '待办事项获取失败',
@@ -250,7 +251,7 @@ Page({
   handleItem() {
     if (!this.data.selectedId) {
       wx.showToast({
-        title: '请先选择一项事项',
+        title: '请先选择一项代办事项',
         duration: 2000,
         icon: 'none',
       });
@@ -258,24 +259,9 @@ Page({
     }
     console.log('selectedId', this.data.selectedId);
     const selectedId = this.data.selectedId;
-    let realName = '';
-    let nodeName = '';
-    let reminder = '';
-    let content = '';
-    if (this.data.todoList) {
-      this.data.todoList.forEach((item) => {
-        if (item.id === selectedId) {
-          realName = item.realName;
-          nodeName = item.nodeName;
-          reminder = item.reminder;
-          content = item.content;
-        }
-      });
-    }
 
-    // TODO: 应该改为只传一个 id，在详情页调用接口匹配 id 来填充数据
     wx.navigateTo({
-      url: `/pages/index/detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
+      url: `/pages/index/detail/detail?id=${selectedId}`,
     });
   },
 
@@ -285,13 +271,8 @@ Page({
     const { handleItem } = evt.currentTarget.dataset;
     if (handleItem) {
       const id = handleItem.id;
-      const realName = handleItem.realName;
-      const nodeName = handleItem.nodeName;
-      const reminder = handleItem.reminder;
-      const content = handleItem.content;
-      // TODO: 应该改为只传一个 id，在详情页调用接口匹配 id 来填充数据
       wx.navigateTo({
-        url: `/pages/index/detail/detail?id=${id}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
+        url: `/pages/index/detail/detail?id=${id}`,
       });
     } else {
       wx.showToast({

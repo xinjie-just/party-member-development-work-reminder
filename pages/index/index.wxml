@@ -44,11 +44,11 @@
     <view wx:if="{{!isPersonal}}" class="other-role">
         <view class="header">
             <text class="welcome">您好，{{userName}}</text>
-            <text wx:if="{{!!total}}" class="tips">您有如下 {{total}} 条代办事项，待你处理</text>
-            <text wx:if="{{!total}}" class="tips">您暂无代办事项</text>
+            <text wx:if="{{!!todoTotal}}" class="tips">您有如下 {{todoTotal}} 条代办事项，待你处理</text>
+            <text wx:if="{{!todoTotal}}" class="tips">您暂无代办事项</text>
         </view>
         <view class="todo-container">
-            <block wx:if="{{!!total}}">
+            <block wx:if="{{!!todoTotal}}">
                 <view class="todo-list">
                     <view class="todo-item {{ item.id === selectedId ? 'todo-item-active' : ''}}" wx:for="{{todoList}}" data-id="{{item.id}}" wx:key="index" catchtap="selectTodoItem">
                         <view class="index">{{index + 1}}.</view>
@@ -62,7 +62,7 @@
                     去处理
                 </view>
             </block>
-            <image src="../../assets/images/img_nodata.png" class="no-data-img" wx:if="{{!total}}"></image>
+            <image src="../../assets/images/img_nodata.png" class="no-data-img" wx:if="{{!todoTotal}}"></image>
         </view>
     </view>
 </view>
