@@ -1,4 +1,3 @@
-// pages/bind-phone/bind-phone.js
 const app = getApp();
 Page({
   /**
@@ -106,7 +105,7 @@ Page({
             }
             // 去验证手机号密码，验证成功就调接口去绑定，不跳绑定手机号页面，跳首页
             wx.navigateTo({
-              url: `../validation-password/validation-password?phoneNum=${that.data.phone}`,
+              url: `/pages/validation-password/validation-password?phoneNum=${that.data.phone}`,
             });
           } else {
             that.toBind();
@@ -119,7 +118,7 @@ Page({
           });
           setTimeout(() => {
             wx.redirectTo({
-              url: '../wechat-login/wechat-login',
+              url: '/pages/wechat-login/wechat-login',
             });
           }, 2000);
         }
@@ -181,7 +180,7 @@ Page({
           };
           setTimeout(() => {
             wx.switchTab({
-              url: '../index/index',
+              url: '/pages/index/index',
             });
           }, 2000);
         } else if (info.code === 401) {
@@ -192,7 +191,7 @@ Page({
           });
           setTimeout(() => {
             wx.redirectTo({
-              url: '../wechat-login/wechat-login',
+              url: '/pages/wechat-login/wechat-login',
             });
           }, 2000);
         } else {
@@ -212,39 +211,4 @@ Page({
       },
     });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {},
 });

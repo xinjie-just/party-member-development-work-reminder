@@ -1,4 +1,3 @@
-//index.js
 //获取应用实例
 const app = getApp();
 
@@ -26,15 +25,14 @@ Page({
     this.setData({
       loading: true,
     });
-    const storageUserOtherInfo = wx.getStorageSync('userOtherInfo');
-    console.log('用户信息', storageUserOtherInfo);
+    const userOtherInfo = wx.getStorageSync('userOtherInfo');
+    // console.log('用户信息', userOtherInfo);
 
-    if (storageUserOtherInfo) {
-      const idRole = storageUserOtherInfo.idRole;
-      const userName =
-        storageUserOtherInfo.realName || storageUserOtherInfo.nickName;
-      const idUser = storageUserOtherInfo.idUser;
-      const phoneNum = storageUserOtherInfo.phoneNum;
+    if (userOtherInfo) {
+      const idRole = userOtherInfo.idRole;
+      const userName = userOtherInfo.realName || userOtherInfo.nickName;
+      const idUser = userOtherInfo.idUser;
+      const phoneNum = userOtherInfo.phoneNum;
 
       this.setData({
         idRole,
@@ -57,16 +55,16 @@ Page({
         this.getAllRole();
       }
     } else {
-      wx.showToast({
-        title: '登录已过期或未登录',
-        duration: 2000,
-        icon: 'none',
+      // wx.showToast({
+      //   title: '登录已过期或未登录',
+      //   duration: 2000,
+      //   icon: 'none',
+      // });
+      // setTimeout(() => {
+      wx.redirectTo({
+        url: '/pages/wechat-login/wechat-login',
       });
-      setTimeout(() => {
-        wx.redirectTo({
-          url: '../wechat-login/wechat-login',
-        });
-      }, 2000);
+      // }, 2000);
     }
   },
 
@@ -139,7 +137,7 @@ Page({
           });
           setTimeout(() => {
             wx.redirectTo({
-              url: '../wechat-login/wechat-login',
+              url: '/pages/wechat-login/wechat-login',
             });
           }, 2000);
         } else {
@@ -217,7 +215,7 @@ Page({
           });
           setTimeout(() => {
             wx.redirectTo({
-              url: '../wechat-login/wechat-login',
+              url: '/pages/wechat-login/wechat-login',
             });
           }, 2000);
         } else {
@@ -277,7 +275,7 @@ Page({
 
     // TODO: 应该改为只传一个 id，在详情页调用接口匹配 id 来填充数据
     wx.navigateTo({
-      url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
+      url: `/pages/index/detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
     });
   },
 
@@ -293,7 +291,7 @@ Page({
       const content = handleItem.content;
       // TODO: 应该改为只传一个 id，在详情页调用接口匹配 id 来填充数据
       wx.navigateTo({
-        url: `./detail/detail?id=${id}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
+        url: `/pages/index/detail/detail?id=${id}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
       });
     } else {
       wx.showToast({
@@ -345,7 +343,7 @@ Page({
           });
           setTimeout(() => {
             wx.redirectTo({
-              url: '../../wechat-login/wechat-login',
+              url: '/pages/wechat-login/wechat-login',
             });
           }, 2000);
         } else {
@@ -420,7 +418,7 @@ Page({
           });
           setTimeout(() => {
             wx.redirectTo({
-              url: '../../wechat-login/wechat-login',
+              url: '/pages/wechat-login/wechat-login',
             });
           }, 2000);
         } else {

@@ -1,4 +1,3 @@
-<!-- pages/index/detail/detail.wxml -->
 <view class="page">
   <text class="header">{{reminder}}</text>
   <view class="body">

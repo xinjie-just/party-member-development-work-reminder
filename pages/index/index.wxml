@@ -1,4 +1,4 @@
-<mp-loading wx:if="{{loading}}" type="circle" tips="首页数据加载中"></mp-loading>
+<!-- <mp-loading wx:if="{{loading}}" type="circle" tips="首页数据加载中"></mp-loading> -->
 <view wx:if="{{!loading}}" class="page">
     <!-- 个人 -->
     <view wx:if="{{isPersonal}}" class="personal">

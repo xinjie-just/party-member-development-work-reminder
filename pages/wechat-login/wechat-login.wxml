@@ -1,4 +1,3 @@
-<!--pages/wechat-login.wxml-->
 <view class="container">
   <block wx:if="{{!hasUserInfo && canIUse}}">
     <image src="/assets/images/logo@2x.png" class="logo"></image>
@@ -6,13 +5,12 @@
     <text class="auth-describe">请允许微信授权以获取你的身份信息</text>
     <!-- <button class="submit-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 同意 </button> -->
     <view class="submit-container">
-      <button id="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 同意 </button>
+      <button id="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">同意</button>
     </view>
-
     <view class="phone-password-login-btn" catchtap="phonePasswordLogin">手机号密码登录</view>
   </block>
   <block wx:else>
-    <image bindtap="bindViewTap" class="userinfo-avatar logo" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <image class="userinfo-avatar logo" src="{{userInfo.avatarUrl}}" mode="cover"></image>
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </block>
 </view>
