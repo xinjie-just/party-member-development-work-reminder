@@ -4,6 +4,7 @@ Page({
    */
   data: {
     submitLoading: false,
+    hasResults: false, // 请求有返回了
     timer: null,
   },
 
@@ -17,9 +18,11 @@ Page({
   subscribe() {
     clearTimeout(this.data.timer);
     const timer = setTimeout(() => {
-      this.setData({
-        submitLoading: true,
-      });
+      if (!this.data.hasResults) {
+        this.setData({
+          submitLoading: true,
+        });
+      }
     }, 1000);
     this.setData({
       timer,
@@ -59,6 +62,7 @@ Page({
       complete() {
         that.setData({
           submitLoading: false,
+          hasResults: true,
         });
       },
     });

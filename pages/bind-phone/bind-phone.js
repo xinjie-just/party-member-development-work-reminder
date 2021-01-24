@@ -11,6 +11,7 @@ Page({
     valid: false,
     submitLoading: false,
     timer: null,
+    hasResults: false, // 请求有返回了
   },
 
   /**
@@ -85,9 +86,11 @@ Page({
   queryUserByPhoneNum() {
     clearTimeout(this.data.timer);
     const timer = setTimeout(() => {
-      this.setData({
-        submitLoading: true,
-      });
+      if (!this.data.hasResults) {
+        this.setData({
+          submitLoading: true,
+        });
+      }
     }, 1000);
     this.setData({
       timer,
@@ -145,6 +148,7 @@ Page({
       complete() {
         that.setData({
           submitLoading: false,
+          hasResults: true,
         });
       },
     });

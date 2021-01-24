@@ -13,6 +13,7 @@ Page({
     newPassword: '',
     confirmPassword: '',
     submitLoading: false,
+    hasResults: false, // 请求有返回了
     timer: null,
     oldPasswordVisible: false,
     newPasswordVisible: false,
@@ -95,9 +96,11 @@ Page({
 
     clearTimeout(this.data.timer);
     const timer = setTimeout(() => {
-      this.setData({
-        submitLoading: true,
-      });
+      if (!this.data.hasResults) {
+        this.setData({
+          submitLoading: true,
+        });
+      }
     }, 1000);
     this.setData({
       timer,
@@ -163,6 +166,7 @@ Page({
       complete() {
         that.setData({
           submitLoading: false,
+          hasResults: true,
         });
       },
     });

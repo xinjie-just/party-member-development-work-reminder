@@ -15,6 +15,7 @@ Page({
     todoTotal: 0,
     submitLoading: false,
     timer: null,
+    hasResults: false, // 请求有返回了
   },
 
   /**
@@ -148,9 +149,11 @@ Page({
   handleTask() {
     clearTimeout(this.data.timer);
     const timer = setTimeout(() => {
-      this.setData({
-        submitLoading: true,
-      });
+      if (!this.data.hasResults) {
+        this.setData({
+          submitLoading: true,
+        });
+      }
     }, 1000);
     this.setData({
       timer,
@@ -213,6 +216,7 @@ Page({
       complete() {
         that.setData({
           submitLoading: false,
+          hasResults: true,
         });
       },
     });

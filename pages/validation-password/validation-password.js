@@ -12,6 +12,7 @@ Page({
     passwordVisible: false, // 密码不明文显示
     hasPhone: false,
     submitLoading: false,
+    hasResults: false, // 请求有返回了
     timer: null,
   },
 
@@ -84,9 +85,11 @@ Page({
     } else {
       clearTimeout(this.data.timer);
       const timer = setTimeout(() => {
-        this.setData({
-          submitLoading: true,
-        });
+        if (!this.data.hasResults) {
+          this.setData({
+            submitLoading: true,
+          });
+        }
       }, 1000);
       this.setData({
         timer,
@@ -147,6 +150,7 @@ Page({
         complete() {
           that.setData({
             submitLoading: false,
+            hasResults: true,
           });
         },
       });
