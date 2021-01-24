@@ -274,6 +274,8 @@ Page({
         }
       });
     }
+
+    // TODO: 应该改为只传一个 id，在详情页调用接口匹配 id 来填充数据
     wx.navigateTo({
       url: `./detail/detail?id=${selectedId}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
     });
@@ -289,6 +291,7 @@ Page({
       const nodeName = handleItem.nodeName;
       const reminder = handleItem.reminder;
       const content = handleItem.content;
+      // TODO: 应该改为只传一个 id，在详情页调用接口匹配 id 来填充数据
       wx.navigateTo({
         url: `./detail/detail?id=${id}&realName=${realName}&nodeName=${nodeName}&reminder=${reminder}&content=${content}`,
       });
