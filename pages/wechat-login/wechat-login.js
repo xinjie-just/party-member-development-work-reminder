@@ -59,72 +59,81 @@ Page({
       userInfo: e.detail.userInfo,
       // hasUserInfo: true
     });
-    let that = this;
-    wx.login({
-      success(data) {
-        // console.log('code', data.code);
-        if (data.code) {
-          // 发起网络请求
-          wx.request({
-            url: `${app.globalData.hostname}/user/weiXinLogin`,
-            data: {
-              code: data.code,
-            },
-            header: {
-              accessSide: 'weixin',
-            },
-            success(value) {
-              const info = value.data;
-              if (info.code === 200) {
-                wx.setStorageSync('openid', info.data.openid);
-                wx.setStorageSync('sessionKey', info.data.sessionKey);
-                if (info.data.token) {
-                  wx.setStorageSync('token', info.data.token);
-                }
-                wx.showToast({
-                  title: '身份信息获取成功',
-                  icon: 'none',
-                  duration: 2000,
-                });
-                if (info.data.user) {
-                  // 绑定过了
-                  wx.setStorageSync('userOtherInfo', info.data.user);
-                  setTimeout(() => {
-                    wx.switchTab({
-                      url: '/pages/index/index',
+    if (e.detail.errMsg === 'getUserInfo:ok') {
+      let that = this;
+      wx.login({
+        success(data) {
+          // console.log('code', data.code);
+          if (data.code) {
+            // 发起网络请求
+            wx.request({
+              url: `${app.globalData.hostname}/user/weiXinLogin`,
+              data: {
+                code: data.code,
+              },
+              header: {
+                accessSide: 'weixin',
+              },
+              success(value) {
+                const info = value.data;
+                if (info.code === 200) {
+                  wx.setStorageSync('openid', info.data.openid);
+                  wx.setStorageSync('sessionKey', info.data.sessionKey);
+                  if (info.data.token) {
+                    wx.setStorageSync('token', info.data.token);
+                  }
+                  wx.showToast({
+                    title: '身份信息获取成功',
+                    icon: 'none',
+                    duration: 2000,
+                  });
+                  if (info.data.user) {
+                    // 绑定过了
+                    wx.setStorageSync('userOtherInfo', info.data.user);
+                    setTimeout(() => {
+                      wx.switchTab({
+                        url: '/pages/index/index',
+                      });
+                    }, 2000);
+                  } else {
+                    // 没绑定过，去绑定页面
+                    wx.redirectTo({
+                      url: '/pages/bind-phone/bind-phone',
                     });
-                  }, 2000);
+                  }
                 } else {
-                  // 没绑定过，去绑定页面
-                  wx.redirectTo({
-                    url: '/pages/bind-phone/bind-phone',
+                  wx.showToast({
+                    title: `${value.data.message}`,
+                    icon: 'none',
+                    duration: 2000,
                   });
                 }
-              } else {
+              },
+              fail() {
                 wx.showToast({
-                  title: `${value.data.message}`,
+                  title: '微信登录失败！',
                   icon: 'none',
                   duration: 2000,
                 });
-              }
-            },
-            fail() {
-              wx.showToast({
-                title: '微信登录失败！',
-                icon: 'none',
-                duration: 2000,
-              });
-            },
-          });
-        } else {
-          wx.showToast({
-            title: '登录失败！' + res.errMsg,
-            icon: 'none',
-            duration: 3000,
-          });
-        }
-      },
-    });
+              },
+            });
+          } else {
+            wx.showToast({
+              title: '登录失败！' + res.errMsg,
+              icon: 'none',
+              duration: 3000,
+            });
+          }
+        },
+      });
+    } else {
+      wx.showToast({
+        title:
+          '授权失败！为了你获得更好的体验，请允许微信授权以获取你的身份信息',
+        icon: 'none',
+        duration: 4000,
+      });
+    }
   },
 
   // 手机号密码登录
