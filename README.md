@@ -8,7 +8,7 @@
 
 2. 效果图地址(蓝湖)：[https://lanhuapp.com/url/9LD3n-unN4K](https://lanhuapp.com/url/9LD3n-unN4K)
 
-3. API地址(swagger): [https://www.guizhouyichenjing.com/swagger-ui/](https://www.guizhouyichenjing.com/swagger-ui/)
+3. API 地址(swagger): [https://www.guizhouyichenjing.com/swagger-ui/](https://www.guizhouyichenjing.com/swagger-ui/)
 
 4. servers 地址: [https://www.guizhouyichenjing.com:443](https://www.guizhouyichenjing.com:443)
 
@@ -17,8 +17,8 @@
 - 小程序名称：发展工作提醒
 - 小程序简称：工作提醒
 - 项目名称：党员发展工作提醒
-- AppID：wxacacf4b5335bdfd1
-- AppSecret: 20106ba2ac9a492da9e08e6b75d0df1f
+- AppID：`wxacacf4b5335bdfd1`
+- AppSecret: `20106ba2ac9a492da9e08e6b75d0df1f`
 
 二、小程序官方文档
 
@@ -35,11 +35,15 @@ WXSS 标准：`https://developers.weixin.qq.com/miniprogram/dev/framework/view/w
 
 自定义组件：`https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/`
 
+---
+
 ## 项目介绍
 
 - 党员发展工作提醒(party-member-development-work-reminder)是一个小程序项目。
 - [党员发展工作提醒](https://github.com/xinjie-just/party-member-development-work-reminder)，最新分支：main。
 - 项目参与者：小程序前端李芯杰，后端周杨，项目经理周杨。
+
+---
 
 ## 快速入门
 
@@ -66,3 +70,9 @@ WXSS 标准：`https://developers.weixin.qq.com/miniprogram/dev/framework/view/w
 2. 提交审核上线
 
 待体验没问题后，提交小程序官方审核，审核通过后，成为线上版本，这好比部署了一次生产环境的版本。
+
+---
+
+## 语义话版本规范
+
+语义话版本规范请参考：[https://semver.org/lang/zh-CN/](https://semver.org/lang/zh-CN/)
